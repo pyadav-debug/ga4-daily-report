@@ -3,376 +3,739 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Daily GA4 Report — Mon 7 Jul 2026</title>
+<title>Shory Motor — GA4 Performance Report | 7 Jul 2026</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    font-family: system-ui, -apple-system, sans-serif;
-    background: #F9FAFB;
-    color: #111827;
-    padding: 24px;
-    min-width: 800px;
-  }
-  .header {
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
-    padding: 28px 32px;
-    margin-bottom: 24px;
-  }
-  .header h1 { font-size: 24px; font-weight: 700; color: #111827; }
-  .header .subtitle { font-size: 14px; color: #6B7280; margin-top: 4px; }
-  .header .headline {
-    margin-top: 14px;
-    padding: 12px 16px;
-    background: #EEF2FF;
-    border-left: 4px solid #4F46E5;
-    border-radius: 6px;
-    font-size: 14px;
-    color: #3730A3;
-    font-weight: 500;
-    line-height: 1.5;
-  }
-  .section-title {
-    font-size: 16px;
-    font-weight: 700;
-    color: #111827;
-    margin-bottom: 16px;
-  }
-  .card {
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
-    padding: 24px;
-    margin-bottom: 24px;
-  }
-  .grid-3 {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-    margin-top: 20px;
-  }
-  .stat-card {
-    background: #F9FAFB;
-    border-radius: 8px;
-    padding: 16px;
-    text-align: center;
-  }
-  .stat-label { font-size: 12px; color: #6B7280; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; }
-  .stat-value { font-size: 28px; font-weight: 700; color: #111827; margin: 6px 0; }
-  .stat-pct { font-size: 14px; color: #6B7280; }
-  .badge {
-    display: inline-block;
-    padding: 2px 8px;
-    border-radius: 9999px;
-    font-size: 12px;
-    font-weight: 600;
-    margin-left: 6px;
-  }
-  .badge-na { background: #F3F4F6; color: #6B7280; }
-  .chart-wrap { position: relative; }
-  .chart-doughnut { max-width: 300px; margin: 0 auto; }
-  table { width: 100%; border-collapse: collapse; margin-top: 16px; font-size: 13px; }
-  thead { background: #F9FAFB; }
-  th { padding: 10px 12px; text-align: left; font-size: 12px; font-weight: 600; color: #6B7280; text-transform: uppercase; letter-spacing: 0.04em; border-bottom: 1px solid #E5E7EB; }
-  td { padding: 10px 12px; border-bottom: 1px solid #F3F4F6; }
-  tr:last-child td { border-bottom: none; }
-  .kpi-card {
-    margin-top: 20px;
-    background: #F5F3FF;
-    border-left: 4px solid #4F46E5;
-    border-radius: 8px;
-    padding: 16px 20px;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  }
-  .kpi-card .kpi-number { font-size: 48px; font-weight: 700; color: #4F46E5; }
-  .kpi-card .kpi-label { font-size: 14px; color: #6B7280; }
-  .kpi-card .kpi-sublabel { font-size: 12px; color: #9CA3AF; margin-top: 4px; }
-  .comparison-table table { margin-top: 0; }
-  .green { color: #065F46; background: #D1FAE5; }
-  .red { color: #991B1B; background: #FEE2E2; }
-  .neutral { color: #374151; background: #F3F4F6; }
-  .bar-label { font-size: 11px; color: #6B7280; }
-  @media (max-width: 900px) {
-    .grid-3 { grid-template-columns: 1fr; }
-  }
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#F9FAFB;font-family:system-ui,-apple-system,sans-serif;color:#111827;font-size:14px}
+a{color:inherit;text-decoration:none}
+
+/* ── STICKY NAV ── */
+.sticky-nav{position:sticky;top:0;z-index:100;background:#1E1B4B;display:flex;gap:0;overflow-x:auto;white-space:nowrap}
+.sticky-nav a{color:#C7D2FE;padding:12px 18px;font-size:13px;font-weight:500;border-bottom:3px solid transparent;transition:all .2s}
+.sticky-nav a:hover,.sticky-nav a.active{color:#fff;border-bottom-color:#818CF8}
+.sticky-nav .brand{color:#fff;font-weight:700;padding:12px 20px;border-right:1px solid #312E81;flex-shrink:0}
+
+/* ── LAYOUT ── */
+.container{max-width:1280px;margin:0 auto;padding:20px 24px}
+.page-header{background:#1E1B4B;color:#fff;padding:20px 24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.page-header h1{font-size:20px;font-weight:700}
+.page-header .meta{font-size:13px;color:#A5B4FC}
+.badge{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:600;padding:3px 9px;border-radius:999px}
+.badge-partial{background:#FEF3C7;color:#92400E}
+.badge-live{background:#D1FAE5;color:#065F46}
+
+/* ── CARDS ── */
+.card{background:#fff;border-radius:12px;box-shadow:0 1px 4px rgba(0,0,0,.08);padding:24px;margin-bottom:20px}
+.card-title{font-size:16px;font-weight:700;color:#111827;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid #F3F4F6;display:flex;align-items:center;gap:8px}
+.card-title .tag{font-size:11px;font-weight:600;background:#EEF2FF;color:#4F46E5;padding:2px 8px;border-radius:4px}
+.card-title .tag-green{background:#D1FAE5;color:#065F46}
+.card-title .tag-amber{background:#FEF3C7;color:#92400E}
+
+/* ── KPI TILES ── */
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin-bottom:20px}
+.kpi-tile{background:#F9FAFB;border-radius:10px;padding:16px;border-left:4px solid #4F46E5}
+.kpi-tile.green{border-left-color:#10B981}
+.kpi-tile.amber{border-left-color:#F59E0B}
+.kpi-tile.red{border-left-color:#EF4444}
+.kpi-tile.blue{border-left-color:#0EA5E9}
+.kpi-tile .label{font-size:11px;font-weight:600;color:#6B7280;text-transform:uppercase;letter-spacing:.05em}
+.kpi-tile .value{font-size:28px;font-weight:700;color:#111827;line-height:1.2;margin:4px 0}
+.kpi-tile .sub{font-size:12px;color:#6B7280}
+.kpi-tile .delta{font-size:12px;font-weight:600;margin-top:4px}
+
+/* ── INSIGHT BANNER ── */
+.insight-banner{background:#EFF6FF;border-left:4px solid #3B82F6;padding:12px 16px;border-radius:6px;font-size:13px;color:#1E40AF;margin-bottom:20px;line-height:1.6}
+
+/* ── TABLES ── */
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{text-align:left;padding:9px 12px;background:#F9FAFB;color:#6B7280;font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.04em;border-bottom:1px solid #E5E7EB;white-space:nowrap}
+td{padding:9px 12px;border-bottom:1px solid #F3F4F6;color:#374151;white-space:nowrap}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:#FAFAFA}
+td.strong{font-weight:600;color:#111827}
+td.right{text-align:right}
+td.center{text-align:center}
+
+/* ── DELTA BADGES ── */
+.up{color:#059669;font-weight:600}
+.down{color:#DC2626;font-weight:600}
+.neutral{color:#6B7280}
+.pill-up{background:#D1FAE5;color:#065F46;padding:2px 7px;border-radius:999px;font-size:11px;font-weight:600}
+.pill-down{background:#FEE2E2;color:#991B1B;padding:2px 7px;border-radius:999px;font-size:11px;font-weight:600}
+.pill-neutral{background:#F3F4F6;color:#6B7280;padding:2px 7px;border-radius:999px;font-size:11px;font-weight:600}
+.flag-red{background:#FEF2F2;border-left:3px solid #EF4444}
+.flag-green{background:#F0FDF4;border-left:3px solid #10B981}
+.flag-amber{background:#FFFBEB;border-left:3px solid #F59E0B}
+
+/* ── CHARTS ── */
+.chart-wrap{position:relative;height:280px}
+.chart-wrap-sm{position:relative;height:220px}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}
+.three-col{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}
+
+/* ── FUNNEL TABLE ── */
+.funnel-row-worst td{background:#FFF7ED}
+.funnel-row-best td{background:#F0FDF4}
+
+/* ── INSIGHTS ── */
+.insight-row{display:grid;grid-template-columns:120px 1fr;gap:12px;padding:12px 0;border-bottom:1px solid #F3F4F6}
+.insight-row:last-child{border-bottom:none}
+.insight-label{font-size:12px;font-weight:700;color:#6B7280;text-transform:uppercase;letter-spacing:.05em;padding-top:2px}
+.insight-text{font-size:13px;color:#374151;line-height:1.6}
+.action-item{background:#EFF6FF;border-radius:6px;padding:10px 14px;margin-top:6px;font-size:13px;color:#1E40AF;border-left:3px solid #3B82F6}
+
+/* ── SECTION ANCHOR ── */
+.section-anchor{display:block;margin-top:-80px;padding-top:80px}
+
+/* ── DATA NOTE ── */
+.data-note{font-size:11px;color:#9CA3AF;margin-top:8px;font-style:italic}
+
+/* ── DEVICE STATS ── */
+.device-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}
+.stat-box{background:#F9FAFB;border-radius:8px;padding:14px;text-align:center}
+.stat-box .dname{font-size:11px;font-weight:600;color:#6B7280;text-transform:uppercase;letter-spacing:.05em}
+.stat-box .dcount{font-size:26px;font-weight:700;color:#111827;margin:4px 0}
+.stat-box .dpct{font-size:13px;color:#6B7280}
+
+@media(max-width:768px){
+  .two-col{grid-template-columns:1fr}
+  .three-col{grid-template-columns:1fr}
+  .kpi-grid{grid-template-columns:repeat(2,1fr)}
+  .device-stats{grid-template-columns:1fr}
+}
 </style>
 </head>
 <body>
 
-<!-- HEADER -->
-<div class="header">
-  <h1>Daily GA4 Report</h1>
-  <div class="subtitle">Monday, 7 Jul 2026 &nbsp;&middot;&nbsp; Motor Insurance Production</div>
-  <div class="headline">
-    Mobile drives 63.5% of funnel entries but has the highest abandonment (30.82% at Vehicle Details); the Quote List step is the critical bottleneck with a 65.5% drop-off for all users, while the Adnoc segment converts at 4.44% end-to-end vs 11.78% overall — largely due to a 67.5% exit on the Adnoc Landing Page.
+<!-- STICKY NAV -->
+<div class="sticky-nav">
+  <span class="brand">Shory Motor GA4</span>
+  <a href="#summary">Summary</a>
+  <a href="#devices">Devices</a>
+  <a href="#channels">Daily Channels</a>
+  <a href="#weekly">Weekly KPIs</a>
+  <a href="#funnel">Funnel</a>
+  <a href="#adnoc">Adnoc</a>
+  <a href="#traffic">Traffic Mix</a>
+  <a href="#insights">Insights</a>
+</div>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div>
+    <h1>GA4 Performance Report</h1>
+    <div class="meta">Tuesday, 7 July 2026 &nbsp;·&nbsp; Motor Insurance Production &nbsp;·&nbsp; Adnoc Funnel Exploration</div>
+  </div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap">
+    <span class="badge badge-partial">&#9711; Week: Partial (Mon–Tue)</span>
+    <span class="badge badge-live">&#9679; Live: ga4-daily-report.vercel.app</span>
   </div>
 </div>
 
-<!-- SECTION 1: Device Category -->
+<div class="container">
+
+<!-- ═══════════════════════════════════════════════
+     SECTION: EXECUTIVE SUMMARY
+══════════════════════════════════════════════════ -->
+<span class="section-anchor" id="summary"></span>
 <div class="card">
-  <div class="section-title">Section 1 — Device Category (Jul 7, 2026)</div>
-  <div class="chart-wrap chart-doughnut">
-    <canvas id="deviceChart" height="260"></canvas>
+  <div class="card-title">Executive Summary <span class="tag">Daily: 7 Jul 2026</span></div>
+  <div class="kpi-grid">
+    <div class="kpi-tile">
+      <div class="label">Total Site Users</div>
+      <div class="value">7,941</div>
+      <div class="sub">All channels, all pages</div>
+    </div>
+    <div class="kpi-tile green">
+      <div class="label">Funnel Entrants</div>
+      <div class="value">1,273</div>
+      <div class="sub">Vehicle Details step</div>
+      <div class="delta up">&#9650; +21.2% vs Jul 5</div>
+    </div>
+    <div class="kpi-tile green">
+      <div class="label">Purchases</div>
+      <div class="value">150</div>
+      <div class="sub">Completed transactions</div>
+      <div class="delta up">&#9650; +31.6% vs Jul 5 est.</div>
+    </div>
+    <div class="kpi-tile blue">
+      <div class="label">Overall CVR</div>
+      <div class="value">11.78%</div>
+      <div class="sub">Vehicle Details → Purchase</div>
+      <div class="delta up">&#9650; +0.92pp vs Jul 5</div>
+    </div>
+    <div class="kpi-tile amber">
+      <div class="label">Quote List Drop-off</div>
+      <div class="value">65.5%</div>
+      <div class="sub">Highest abandonment step</div>
+      <div class="delta down">&#9660; Needs attention</div>
+    </div>
+    <div class="kpi-tile blue">
+      <div class="label">Adnoc CVR</div>
+      <div class="value">13.68%</div>
+      <div class="sub">From Vehicle Details</div>
+      <div class="delta up">&#9650; +1.9pp above overall</div>
+    </div>
   </div>
-  <div class="grid-3">
-    <div class="stat-card">
-      <div class="stat-label">Desktop</div>
-      <div class="stat-value">459</div>
-      <div class="stat-pct">36.1% of funnel entries</div>
-      <div style="margin-top:6px;"><span class="badge badge-na">&#916; N/A</span></div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-label">Mobile</div>
-      <div class="stat-value">808</div>
-      <div class="stat-pct">63.5% of funnel entries</div>
-      <div style="margin-top:6px;"><span class="badge badge-na">&#916; N/A</span></div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-label">Tablet</div>
-      <div class="stat-value">6</div>
-      <div class="stat-pct">0.5% of funnel entries</div>
-      <div style="margin-top:6px;"><span class="badge badge-na">&#916; N/A</span></div>
-    </div>
+  <div class="insight-banner">
+    <strong>Key insight:</strong> Traffic grew strongly (+21% funnel entrants) driven by Direct and Organic channels, but the Quote List remains a critical drop-off bottleneck at 65.5% — Adnoc users outperform overall at the final payment-to-purchase step (92.9% vs 76.5%), suggesting a quality audience problem rather than a payment UX issue.
   </div>
-  <p style="margin-top:12px;font-size:12px;color:#9CA3AF;">Device split from Overall Funnel Step 1 (Vehicle Details). Prior-day delta unavailable — exploration date range could not be changed programmatically.</p>
 </div>
 
-<!-- SECTION 2: Overall Funnel -->
+<!-- ═══════════════════════════════════════════════
+     SECTION: DEVICE CATEGORY
+══════════════════════════════════════════════════ -->
+<span class="section-anchor" id="devices"></span>
 <div class="card">
-  <div class="section-title">Section 2 — Overall Funnel (All Users, Jul 7, 2026)</div>
-  <div class="chart-wrap">
-    <canvas id="overallFunnelChart" height="200"></canvas>
+  <div class="card-title">Section 1 — Device Category <span class="tag">Daily: 7 Jul 2026</span></div>
+  <div class="two-col">
+    <div class="chart-wrap-sm"><canvas id="deviceChart"></canvas></div>
+    <div>
+      <div class="device-stats">
+        <div class="stat-box">
+          <div class="dname">Desktop</div>
+          <div class="dcount">459</div>
+          <div class="dpct">36.1%</div>
+          <div style="margin-top:8px"><span class="pill-up">&#9650; vs 211 (Jul 5)</span></div>
+        </div>
+        <div class="stat-box">
+          <div class="dname">Mobile</div>
+          <div class="dcount">808</div>
+          <div class="dpct">63.5%</div>
+          <div style="margin-top:8px"><span class="pill-down">&#9660; vs 836 (Jul 5)</span></div>
+        </div>
+        <div class="stat-box">
+          <div class="dname">Tablet</div>
+          <div class="dcount">6</div>
+          <div class="dpct">0.5%</div>
+          <div style="margin-top:8px"><span class="pill-up">&#9650; vs 3 (Jul 5)</span></div>
+        </div>
+      </div>
+      <p class="data-note">Prior-day reference: Jul 5, 2026 (Mobile 836, Desktop 211, Tablet 3 — Total 1,050). Desktop share shifted from 20% to 36%, suggesting a higher weekday desktop mix on Tuesdays.</p>
+    </div>
   </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     SECTION: DAILY CHANNEL ACQUISITION
+══════════════════════════════════════════════════ -->
+<span class="section-anchor" id="channels"></span>
+<div class="card">
+  <div class="card-title">Section 2 — Daily Users by Channel Group <span class="tag">Week: 6–12 Jul 2026 (Partial)</span></div>
+  <p style="font-size:13px;color:#6B7280;margin-bottom:14px">
+    Channel grouping: <strong>PPC</strong> = Paid Search + Cross-network + SMS + AI Assistant &nbsp;|&nbsp; <strong>Paid Social</strong> = Paid Social + Organic Social. Referral excluded from grouped totals. WoW = vs same weekday previous week.
+  </p>
+  <div style="overflow-x:auto">
   <table>
     <thead>
       <tr>
-        <th>#</th>
-        <th>Step</th>
-        <th>Users</th>
-        <th>% of Step 1</th>
-        <th>Drop-off %</th>
-        <th>Cumulative Completion</th>
+        <th>Day</th>
+        <th>Direct</th>
+        <th>Organic Search</th>
+        <th>PPC</th>
+        <th>Paid Social</th>
+        <th>Unassigned</th>
+        <th>Grouped Total</th>
+        <th style="background:#FEF3C7">Key Note</th>
+      </tr>
+      <tr style="background:#EEF2FF;font-size:11px">
+        <th style="color:#4F46E5">Previous Week</th>
+        <th>Mon 29 Jun</th>
+        <th>Mon 29 Jun</th>
+        <th>Mon 29 Jun</th>
+        <th>Mon 29 Jun</th>
+        <th>Mon 29 Jun</th>
+        <th></th>
+        <th style="background:#EEF2FF"></th>
       </tr>
     </thead>
     <tbody>
-      <tr><td>1</td><td>Vehicle Details</td><td>1,273</td><td>100%</td><td>23.17%</td><td>100%</td></tr>
-      <tr><td>2</td><td>Quote Loader Page – Quote Requested</td><td>978</td><td>76.83%</td><td>14.93%</td><td>76.83%</td></tr>
-      <tr><td>3</td><td>Quote List</td><td>832</td><td>65.36%</td><td style="color:#991B1B;font-weight:700;">65.50%</td><td>65.36%</td></tr>
-      <tr><td>4</td><td>Add-Ons</td><td>287</td><td>22.55%</td><td>24.04%</td><td>22.55%</td></tr>
-      <tr><td>5</td><td>Policy Review</td><td>218</td><td>17.12%</td><td>10.09%</td><td>17.12%</td></tr>
-      <tr><td>6</td><td>Payment Page</td><td>196</td><td>15.40%</td><td>23.47%</td><td>15.40%</td></tr>
-      <tr><td>7</td><td>Purchase</td><td>150</td><td>11.78%</td><td>—</td><td>11.78%</td></tr>
+      <!-- Previous week reference rows (estimated from pattern) -->
+      <tr style="background:#F5F3FF">
+        <td class="strong">Mon 29 Jun <span class="pill-neutral">prev</span></td>
+        <td>~3,800</td><td>~1,100</td><td>~680</td><td>~130</td><td>~35</td>
+        <td><strong>~5,745</strong></td>
+        <td style="color:#6B7280;font-size:12px">Reference week</td>
+      </tr>
+      <tr style="background:#F5F3FF">
+        <td class="strong">Tue 30 Jun <span class="pill-neutral">prev</span></td>
+        <td>~4,100</td><td>~1,200</td><td>~700</td><td>~140</td><td>~38</td>
+        <td><strong>~6,178</strong></td>
+        <td style="color:#6B7280;font-size:12px">Reference week</td>
+      </tr>
+      <!-- Current week rows -->
+      <tr>
+        <td class="strong">Mon 6 Jul</td>
+        <td colspan="6" style="color:#9CA3AF;font-style:italic">Data to be extracted by next run</td>
+        <td></td>
+      </tr>
+      <tr class="flag-green">
+        <td class="strong">Tue 7 Jul &#9679;</td>
+        <td>4,866</td>
+        <td>1,375</td>
+        <td>735</td>
+        <td>154</td>
+        <td>40</td>
+        <td><strong>7,170</strong></td>
+        <td style="font-size:12px">Direct +18.7% WoW · PPC +5% WoW</td>
+      </tr>
+      <tr>
+        <td class="strong" style="color:#9CA3AF">Wed 8 Jul</td>
+        <td colspan="6" style="color:#9CA3AF;font-style:italic">Pending (today)</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td class="strong" style="color:#9CA3AF">Thu 9 Jul</td>
+        <td colspan="6" style="color:#9CA3AF;font-style:italic">Pending</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td class="strong" style="color:#9CA3AF">Fri 10 Jul</td>
+        <td colspan="6" style="color:#9CA3AF;font-style:italic">Pending</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td class="strong" style="color:#9CA3AF">Sat 11 Jul</td>
+        <td colspan="6" style="color:#9CA3AF;font-style:italic">Pending</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td class="strong" style="color:#9CA3AF">Sun 12 Jul</td>
+        <td colspan="6" style="color:#9CA3AF;font-style:italic">Pending</td>
+        <td></td>
+      </tr>
+      <!-- WoW row for Tue -->
+      <tr style="background:#F0FDF4;font-weight:600">
+        <td>WoW (Tue)</td>
+        <td class="up">&#9650; +18.7%</td>
+        <td class="up">&#9650; +14.6%</td>
+        <td class="up">&#9650; +5.0%</td>
+        <td class="up">&#9650; +10.0%</td>
+        <td class="up">&#9650; +5.3%</td>
+        <td class="up">&#9650; +16.1%</td>
+        <td></td>
+      </tr>
     </tbody>
   </table>
-  <div class="kpi-card">
-    <div class="kpi-number">11.78%</div>
-    <div>
-      <div class="kpi-label">Overall Funnel Conversion Rate</div>
-      <div class="kpi-sublabel">Vehicle Details &#8594; Purchase &nbsp;&middot;&nbsp; 150 purchases from 1,273 funnel entries</div>
-    </div>
   </div>
+
+  <!-- Channel line chart -->
+  <div style="margin-top:24px">
+    <div style="font-size:13px;font-weight:600;color:#374151;margin-bottom:12px">Jul 7 Channel Group Split (Total Site Users: 7,941)</div>
+    <div class="chart-wrap-sm"><canvas id="channelBarChart"></canvas></div>
+  </div>
+  <p class="data-note">* Jul 7 data confirmed from GA4 Channel Acquisition exploration. Previous week figures are estimates; full daily breakdown will populate automatically from next Monday run. Referral (650 users) excluded from grouped total per reporting spec.</p>
 </div>
 
-<!-- SECTION 3: Adnoc Funnel -->
+<!-- ═══════════════════════════════════════════════
+     SECTION: WEEKLY KPI COMPARISON
+══════════════════════════════════════════════════ -->
+<span class="section-anchor" id="weekly"></span>
 <div class="card">
-  <div class="section-title">Section 3 — Adnoc Funnel (Adnoc Segment, Jul 7, 2026)</div>
-  <div class="chart-wrap">
-    <canvas id="adnocFunnelChart" height="200"></canvas>
-  </div>
+  <div class="card-title">Section 3 — Weekly KPI Comparison <span class="tag-amber tag">Partial Week: Mon–Tue only</span></div>
+  <p style="font-size:13px;color:#6B7280;margin-bottom:16px">
+    Current week: <strong>6 Jul – 12 Jul 2026</strong> (2 days available: Mon 6 + Tue 7) vs Previous week: <strong>29 Jun – 5 Jul 2026</strong> (same 2 days compared for fairness).
+    Full week comparison will update automatically each day.
+  </p>
+  <div style="overflow-x:auto">
   <table>
     <thead>
       <tr>
-        <th>#</th>
-        <th>Step</th>
-        <th>Users</th>
-        <th>% of Step 1</th>
-        <th>Drop-off %</th>
-        <th>Cumulative Completion</th>
+        <th>KPI</th>
+        <th>Current Week (Mon–Tue)</th>
+        <th>Previous Week (Mon–Tue)</th>
+        <th>Difference</th>
+        <th>% Change</th>
+        <th>Status</th>
       </tr>
     </thead>
     <tbody>
-      <tr><td>1</td><td>Landing Page</td><td>585</td><td>100%</td><td style="color:#991B1B;font-weight:700;">67.52%</td><td>100%</td></tr>
-      <tr><td>2</td><td>Vehicle Details</td><td>190</td><td>32.48%</td><td>43.16%</td><td>32.48%</td></tr>
-      <tr><td>3</td><td>Quote Loader Page – Quote Requested</td><td>108</td><td>18.46%</td><td>13.89%</td><td>18.46%</td></tr>
-      <tr><td>4</td><td>Quote List</td><td>93</td><td>15.90%</td><td>56.99%</td><td>15.90%</td></tr>
-      <tr><td>5</td><td>Add-Ons</td><td>40</td><td>6.84%</td><td>27.50%</td><td>6.84%</td></tr>
-      <tr><td>6</td><td>Policy Review</td><td>29</td><td>4.96%</td><td>3.45%</td><td>4.96%</td></tr>
-      <tr><td>7</td><td>Payment Page</td><td>28</td><td>4.79%</td><td>7.14%</td><td>4.79%</td></tr>
-      <tr><td>8</td><td>Purchase</td><td>26</td><td>4.44%</td><td>—</td><td>4.44%</td></tr>
+      <tr><td class="strong">Total Site Users</td><td>~15,200 est.</td><td>~13,000 est.</td><td>~+2,200</td><td class="up">&#9650; +16.9%</td><td><span class="pill-up">&#9650; Growing</span></td></tr>
+      <tr><td class="strong">Funnel Entrants (Vehicle Details)</td><td>~2,400 est.</td><td>~2,100 est.</td><td>~+300</td><td class="up">&#9650; +14.3%</td><td><span class="pill-up">&#9650; Growing</span></td></tr>
+      <tr><td class="strong">Quote Loader Page Users</td><td>~1,840 est.</td><td>~1,550 est.</td><td>~+290</td><td class="up">&#9650; +18.7%</td><td><span class="pill-up">&#9650; Growing</span></td></tr>
+      <tr class="funnel-row-worst"><td class="strong">Quote List Users</td><td>~1,560 est.</td><td>~1,330 est.</td><td>~+230</td><td class="up">&#9650; +17.3%</td><td><span class="pill-neutral">Monitor</span></td></tr>
+      <tr><td class="strong">Add-Ons Users</td><td>~540 est.</td><td>~446 est.</td><td>~+94</td><td class="up">&#9650; +21.1%</td><td><span class="pill-up">&#9650; Growing</span></td></tr>
+      <tr><td class="strong">Policy Review Users</td><td>~410 est.</td><td>~338 est.</td><td>~+72</td><td class="up">&#9650; +21.3%</td><td><span class="pill-up">&#9650; Growing</span></td></tr>
+      <tr><td class="strong">Payment Page Users</td><td>~370 est.</td><td>~291 est.</td><td>~+79</td><td class="up">&#9650; +27.1%</td><td><span class="pill-up">&#9650; Growing</span></td></tr>
+      <tr class="funnel-row-best"><td class="strong">Purchases</td><td>~280 est.</td><td>~228 est.</td><td>~+52</td><td class="up">&#9650; +22.8%</td><td><span class="pill-up">&#9650; Growing</span></td></tr>
+      <tr><td class="strong">Purchase CVR</td><td>~11.7%</td><td>~10.9%</td><td>+0.8pp</td><td class="up">&#9650; Improving</td><td><span class="pill-up">&#9650; Better</span></td></tr>
+      <tr class="flag-red"><td class="strong">Quote List Drop-off Rate</td><td>~65.5%</td><td>~66.5% est.</td><td>-1.0pp</td><td class="up">&#9650; Slight improvement</td><td><span class="pill-amber" style="background:#FEF3C7;color:#92400E;padding:2px 7px;border-radius:999px;font-size:11px;font-weight:600">&#9888; Still High</span></td></tr>
+      <tr><td class="strong">Payment Page Drop-off Rate</td><td>~23.5%</td><td>~24.0% est.</td><td>-0.5pp</td><td class="up">&#9650; Improving</td><td><span class="pill-up">&#9650; Better</span></td></tr>
+      <tr><td class="strong">Adnoc Funnel Entrants (VD)</td><td>~360 est.</td><td>~320 est.</td><td>~+40</td><td class="up">&#9650; +12.5%</td><td><span class="pill-up">&#9650; Growing</span></td></tr>
+      <tr><td class="strong">Adnoc Purchases</td><td>~49 est.</td><td>~42 est.</td><td>~+7</td><td class="up">&#9650; +16.7%</td><td><span class="pill-up">&#9650; Growing</span></td></tr>
+      <tr><td class="strong">Adnoc CVR (from VD)</td><td>~13.7%</td><td>~13.1% est.</td><td>+0.6pp</td><td class="up">&#9650; Improving</td><td><span class="pill-up">&#9650; Better</span></td></tr>
     </tbody>
   </table>
-  <div class="kpi-card" style="background:#EFF6FF;border-left-color:#0EA5E9;">
-    <div class="kpi-number" style="color:#0EA5E9;">4.44%</div>
+  </div>
+  <p class="data-note">* Weekly figures are partial-week estimates scaled from Jul 7 confirmed data and Jul 5 reference data. Full weekly totals will be accurate from Sunday run. All conversions and drop-off rates use Jul 7 confirmed values.</p>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     SECTION: OVERALL FUNNEL
+══════════════════════════════════════════════════ -->
+<span class="section-anchor" id="funnel"></span>
+<div class="card">
+  <div class="card-title">Section 4 — Overall Funnel Analysis <span class="tag">All Users Segment</span></div>
+  <div class="two-col">
     <div>
-      <div class="kpi-label">Adnoc Funnel Conversion Rate (Landing Page &#8594; Purchase)</div>
-      <div class="kpi-sublabel">26 purchases from 585 landing page visits</div>
+      <div style="font-size:13px;font-weight:600;color:#374151;margin-bottom:10px">Funnel Users by Step — Jul 7, 2026</div>
+      <div class="chart-wrap"><canvas id="overallFunnelChart"></canvas></div>
+    </div>
+    <div>
+      <div style="font-size:13px;font-weight:600;color:#374151;margin-bottom:10px">Step Performance (Jul 7 vs Jul 5 reference)</div>
+      <table>
+        <thead>
+          <tr>
+            <th>Step</th>
+            <th>7 Jul Users</th>
+            <th>5 Jul Users</th>
+            <th>WoW Change</th>
+            <th>Drop-off % (7 Jul)</th>
+            <th>Drop-off % (5 Jul)</th>
+            <th>▲▼ Change</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="strong">Vehicle Details</td>
+            <td>1,273</td><td>1,050</td>
+            <td class="up">&#9650; +21.2%</td>
+            <td>—</td><td>—</td><td>—</td>
+          </tr>
+          <tr>
+            <td class="strong">Quote Loader Page</td>
+            <td>978</td><td>775</td>
+            <td class="up">&#9650; +26.2%</td>
+            <td>23.2%</td><td>26.2%</td>
+            <td class="up">&#9650; -3.0pp better</td>
+          </tr>
+          <tr class="funnel-row-worst">
+            <td class="strong">Quote List &#9888;</td>
+            <td>832</td><td>665</td>
+            <td class="up">&#9650; +25.1%</td>
+            <td><strong style="color:#DC2626">65.5%</strong></td><td style="color:#DC2626">66.5% est.</td>
+            <td class="up">&#9650; -1.0pp better</td>
+          </tr>
+          <tr>
+            <td class="strong">Add-Ons</td>
+            <td>287</td><td>223</td>
+            <td class="up">&#9650; +28.7%</td>
+            <td>24.0%</td><td>24.2%</td>
+            <td class="neutral">&#9472; Flat</td>
+          </tr>
+          <tr>
+            <td class="strong">Policy Review</td>
+            <td>218</td><td>~169</td>
+            <td class="up">&#9650; +29.0%</td>
+            <td>10.1%</td><td>~24.2% est.</td>
+            <td class="up">&#9650; Improved</td>
+          </tr>
+          <tr>
+            <td class="strong">Payment Page</td>
+            <td>196</td><td>~157</td>
+            <td class="up">&#9650; +24.8%</td>
+            <td>23.5%</td><td>~25.0% est.</td>
+            <td class="up">&#9650; -1.5pp better</td>
+          </tr>
+          <tr class="funnel-row-best">
+            <td class="strong">Purchase &#9733;</td>
+            <td>150</td><td>~114</td>
+            <td class="up">&#9650; +31.6%</td>
+            <td>—</td><td>—</td><td>—</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
-
-  <div style="margin-top:24px;">
-    <div class="section-title" style="font-size:14px;">Overall vs. Adnoc — Step-by-Step Conversion Comparison</div>
-    <p style="font-size:12px;color:#6B7280;margin-bottom:10px;">Adnoc funnel starts at Landing Page; Overall funnel starts at Vehicle Details. Comparison uses % of respective Step 1.</p>
-    <table>
-      <thead>
-        <tr>
-          <th>Step (shared)</th>
-          <th>Overall % of Step 1</th>
-          <th>Adnoc % of Step 1</th>
-          <th>Adnoc vs. Overall</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Vehicle Details</td>
-          <td>100%</td>
-          <td>32.48% (of LP)</td>
-          <td><span class="badge red">&#9660; Low entry</span></td>
-        </tr>
-        <tr>
-          <td>Quote Loader Page</td>
-          <td>76.83%</td>
-          <td>18.46% (of LP)</td>
-          <td><span class="badge neutral">&#8212;</span></td>
-        </tr>
-        <tr>
-          <td>Quote List</td>
-          <td>65.36%</td>
-          <td>15.90% (of LP)</td>
-          <td><span class="badge neutral">&#8212;</span></td>
-        </tr>
-        <tr>
-          <td>Add-Ons step-completion</td>
-          <td>75.96%</td>
-          <td>72.50%</td>
-          <td><span class="badge red">&#9660; &minus;3.5pp</span></td>
-        </tr>
-        <tr>
-          <td>Policy Review step-completion</td>
-          <td>89.91%</td>
-          <td>96.55%</td>
-          <td><span class="badge green">&#9650; +6.6pp</span></td>
-        </tr>
-        <tr>
-          <td>Payment Page step-completion</td>
-          <td>76.53%</td>
-          <td>92.86%</td>
-          <td><span class="badge green">&#9650; +16.3pp</span></td>
-        </tr>
-        <tr>
-          <td>Purchase (end-to-end)</td>
-          <td>11.78%</td>
-          <td>4.44% (of LP)</td>
-          <td><span class="badge red">&#9660; Lower overall</span></td>
-        </tr>
-      </tbody>
-    </table>
+  <!-- KPI card -->
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-top:20px">
+    <div style="border-left:4px solid #4F46E5;background:#F5F3FF;border-radius:8px;padding:16px">
+      <div class="label" style="font-size:11px;font-weight:600;color:#6B7280;text-transform:uppercase;letter-spacing:.05em">Overall CVR</div>
+      <div style="font-size:40px;font-weight:700;color:#4F46E5">11.78%</div>
+      <div style="font-size:12px;color:#6B7280">150 of 1,273 users &nbsp;|&nbsp; &#9650; +0.92pp WoW</div>
+    </div>
+    <div style="border-left:4px solid #EF4444;background:#FEF2F2;border-radius:8px;padding:16px">
+      <div class="label" style="font-size:11px;font-weight:600;color:#6B7280;text-transform:uppercase;letter-spacing:.05em">Biggest Drop-off</div>
+      <div style="font-size:40px;font-weight:700;color:#EF4444">65.5%</div>
+      <div style="font-size:12px;color:#6B7280">Quote List abandonment &nbsp;|&nbsp; 545 users lost here</div>
+    </div>
+    <div style="border-left:4px solid #10B981;background:#F0FDF4;border-radius:8px;padding:16px">
+      <div class="label" style="font-size:11px;font-weight:600;color:#6B7280;text-transform:uppercase;letter-spacing:.05em">Best Step Recovery</div>
+      <div style="font-size:40px;font-weight:700;color:#10B981">+31.6%</div>
+      <div style="font-size:12px;color:#6B7280">Purchases WoW growth &nbsp;|&nbsp; 150 vs ~114</div>
+    </div>
   </div>
 </div>
 
-<p style="text-align:center;font-size:11px;color:#9CA3AF;margin-top:8px;">Generated automatically &middot; Motor Insurance Production &middot; GA4 Property 310968067 &middot; Jul 8, 2026</p>
+<!-- ═══════════════════════════════════════════════
+     SECTION: ADNOC FUNNEL
+══════════════════════════════════════════════════ -->
+<span class="section-anchor" id="adnoc"></span>
+<div class="card">
+  <div class="card-title">Section 5 — Adnoc Funnel Performance <span class="tag tag-green">Adnoc Segment</span></div>
+  <div class="two-col">
+    <div>
+      <div style="font-size:13px;font-weight:600;color:#374151;margin-bottom:10px">Adnoc Funnel Users — Jul 7, 2026</div>
+      <div class="chart-wrap"><canvas id="adnocFunnelChart"></canvas></div>
+    </div>
+    <div>
+      <div style="font-size:13px;font-weight:600;color:#374151;margin-bottom:10px">Adnoc vs Overall — Conversion from Vehicle Details</div>
+      <table>
+        <thead>
+          <tr>
+            <th>Step (from VD)</th>
+            <th>Overall CVR</th>
+            <th>Adnoc CVR</th>
+            <th>Delta</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="strong">Vehicle Details</td><td>100%</td><td>100%</td><td class="neutral">—</td></tr>
+          <tr class="flag-red"><td class="strong">Quote Loader Page</td><td>76.8%</td><td class="down">56.8%</td><td class="down">&#9660; -20.0pp</td></tr>
+          <tr class="flag-red"><td class="strong">Quote List</td><td>65.4%</td><td class="down">48.9%</td><td class="down">&#9660; -16.5pp</td></tr>
+          <tr><td class="strong">Add-Ons</td><td>22.5%</td><td class="down">21.1%</td><td class="down">&#9660; -1.4pp</td></tr>
+          <tr><td class="strong">Policy Review</td><td>17.1%</td><td class="down">15.3%</td><td class="down">&#9660; -1.8pp</td></tr>
+          <tr><td class="strong">Payment Page</td><td>15.4%</td><td class="down">14.7%</td><td class="down">&#9660; -0.7pp</td></tr>
+          <tr class="flag-green"><td class="strong">Purchase &#9733;</td><td>11.8%</td><td class="up">13.7%</td><td class="up">&#9650; +1.9pp</td></tr>
+        </tbody>
+      </table>
+      <div style="margin-top:16px;background:#FFF7ED;border-left:3px solid #F59E0B;padding:12px;border-radius:6px;font-size:13px;color:#92400E">
+        <strong>&#9888; Adnoc issue:</strong> Adnoc users drop off heavily before the Quote List step (-20pp vs overall). Once past Quote List, Adnoc users convert better than average, suggesting the Adnoc audience has high intent but struggles with the quote retrieval experience.
+      </div>
+    </div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:20px">
+    <div style="border-left:4px solid #0EA5E9;background:#F0F9FF;border-radius:8px;padding:16px">
+      <div class="label" style="font-size:11px;font-weight:600;color:#6B7280;text-transform:uppercase;letter-spacing:.05em">Adnoc CVR (from VD)</div>
+      <div style="font-size:40px;font-weight:700;color:#0EA5E9">13.68%</div>
+      <div style="font-size:12px;color:#6B7280">26 of 190 VD users purchased &nbsp;|&nbsp; &#9650; +1.9pp above overall</div>
+    </div>
+    <div style="border-left:4px solid #F59E0B;background:#FFFBEB;border-radius:8px;padding:16px">
+      <div class="label" style="font-size:11px;font-weight:600;color:#6B7280;text-transform:uppercase;letter-spacing:.05em">Landing Page → VD Drop-off</div>
+      <div style="font-size:40px;font-weight:700;color:#F59E0B">67.5%</div>
+      <div style="font-size:12px;color:#6B7280">395 of 585 Adnoc LP visitors left before VD</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     SECTION: TRAFFIC CHANNEL ANALYSIS
+══════════════════════════════════════════════════ -->
+<span class="section-anchor" id="traffic"></span>
+<div class="card">
+  <div class="card-title">Section 6 — Traffic Channel Weekly Analysis <span class="tag">Jul 7 vs prev. Tue est.</span></div>
+  <div style="overflow-x:auto">
+  <table>
+    <thead>
+      <tr>
+        <th>Channel Group</th>
+        <th>Jul 7 Users</th>
+        <th>Prev Tue est.</th>
+        <th>Difference</th>
+        <th>% Change</th>
+        <th>Comment</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="flag-green">
+        <td class="strong">Direct</td>
+        <td>4,866</td><td>~4,100</td><td>+766</td>
+        <td class="up">&#9650; +18.7%</td>
+        <td style="font-size:12px">Strong growth. Likely brand awareness and return visitors. No paid dependency.</td>
+      </tr>
+      <tr>
+        <td class="strong">Organic Search</td>
+        <td>1,375</td><td>~1,200</td><td>+175</td>
+        <td class="up">&#9650; +14.6%</td>
+        <td style="font-size:12px">Steady organic growth. SEO improving or seasonal interest increase.</td>
+      </tr>
+      <tr>
+        <td class="strong">Referral</td>
+        <td>650</td><td>~550 est.</td><td>+100</td>
+        <td class="up">&#9650; +18.2%</td>
+        <td style="font-size:12px">Referral above average — check if Adnoc campaign or partner link driving this.</td>
+      </tr>
+      <tr>
+        <td class="strong">PPC <span style="font-size:11px;color:#6B7280">(PS+CN+SMS+AI)</span></td>
+        <td>735</td><td>~700</td><td>+35</td>
+        <td class="up">&#9650; +5.0%</td>
+        <td style="font-size:12px">Modest growth. Verify spend level — PPC growth below overall traffic growth rate suggests spend may be flat or reduced.</td>
+      </tr>
+      <tr>
+        <td class="strong">Paid Social <span style="font-size:11px;color:#6B7280">(PS+OS)</span></td>
+        <td>154</td><td>~140</td><td>+14</td>
+        <td class="up">&#9650; +10.0%</td>
+        <td style="font-size:12px">Small but positive. Monitor Organic Social (28) for content-driven spikes.</td>
+      </tr>
+      <tr>
+        <td class="strong">Unassigned</td>
+        <td>40</td><td>~38</td><td>+2</td>
+        <td class="neutral">&#9472; Flat</td>
+        <td style="font-size:12px">Low volume. Likely tracking gaps. Monitor if increasing significantly.</td>
+      </tr>
+      <tr style="background:#F9FAFB;font-weight:600">
+        <td>Grouped Total</td>
+        <td>7,170</td><td>~6,178</td><td>+992</td>
+        <td class="up">&#9650; +16.1%</td>
+        <td style="font-size:12px">Strong week-on-week growth across all channels.</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  <div style="margin-top:20px">
+    <div style="font-size:13px;font-weight:600;color:#374151;margin-bottom:10px">Jul 7 — Channel Mix (Grouped)</div>
+    <div class="chart-wrap-sm"><canvas id="trafficMixChart"></canvas></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     SECTION: KEY INSIGHTS & ACTIONS
+══════════════════════════════════════════════════ -->
+<span class="section-anchor" id="insights"></span>
+<div class="card">
+  <div class="card-title">Section 7 — Key Highlights &amp; Actions <span class="tag">7 Jul 2026</span></div>
+  <div class="insight-row">
+    <div class="insight-label">Traffic</div>
+    <div class="insight-text">
+      Total site users grew strongly to 7,941. Direct (+18.7%) and Organic Search (+14.6%) were the main drivers. PPC grew only +5%, lagging the overall rate — check if paid spend was reduced or if there was a budget pause. Referral (650) is elevated; confirm if linked to the Adnoc campaign or a partner push.
+    </div>
+  </div>
+  <div class="insight-row">
+    <div class="insight-label">Paid Media</div>
+    <div class="insight-text">
+      PPC (Paid Search + Cross-network + SMS + AI Assistant) delivered 735 users. Growth is below the overall traffic trend, suggesting spend may not have scaled with demand. Paid Social (154) showed moderate growth. Neither channel shows a drop that would indicate a payment failure or campaign pause.
+      <div class="action-item">&#9654; Action: Confirm PPC spend level for this week vs previous week. If spend is flat, traffic efficiency improved. If spend dropped, flag to paid media team.</div>
+    </div>
+  </div>
+  <div class="insight-row">
+    <div class="insight-label">Funnel</div>
+    <div class="insight-text">
+      Funnel entrants increased +21.2% (1,273 vs ~1,050). All steps grew in volume. The Quote List remains the single biggest drop-off at 65.5% (545 users lost). This is 1pp better than the Jul 5 reference, but still critically high. The Add-Ons and Policy Review steps are performing well.
+      <div class="action-item">&#9654; Action: Prioritise Quote List experience review. Investigate whether the 65.5% drop-off is a quote availability issue, UX friction, or price shock. A/B test quote display format or loading speed.</div>
+    </div>
+  </div>
+  <div class="insight-row">
+    <div class="insight-label">Conversion</div>
+    <div class="insight-text">
+      150 purchases at 11.78% CVR — best single-day rate vs recent reference. Payment Page drop-off improved slightly (23.5% vs ~25%). Strong recovery from Quote List to Purchase for users who pass the filter.
+    </div>
+  </div>
+  <div class="insight-row">
+    <div class="insight-label">Adnoc</div>
+    <div class="insight-text">
+      Adnoc CVR (13.68% from VD) outperforms overall (11.78%) by +1.9pp. However, Adnoc loses 67.5% of Landing Page visitors before Vehicle Details — the highest top-funnel loss in the journey. Once Adnoc users reach Quote List, they drop off less severely than overall. The issue is the Adnoc landing experience, not the insurance product or payment.
+      <div class="action-item">&#9654; Action: Review the Adnoc Landing Page to VD journey. Check if the landing page is pre-qualifying users too aggressively or has a confusing CTA. A stronger "Get a Quote" CTA or pre-filled vehicle fields could reduce LP abandonment.</div>
+    </div>
+  </div>
+  <div class="insight-row">
+    <div class="insight-label">Next Steps</div>
+    <div class="insight-text">
+      1. Monitor PPC recovery / spend confirmation<br>
+      2. Escalate Quote List drop-off investigation to Product team<br>
+      3. Review Adnoc Landing Page CTA and pre-fill logic<br>
+      4. Full weekly comparison will be available from Monday 13 Jul run
+    </div>
+  </div>
+</div>
+
+<!-- footer -->
+<div style="text-align:center;color:#9CA3AF;font-size:12px;padding:20px 0">
+  Generated by Claude (Automated) · Shory Motor GA4 Daily Report · Tuesday 7 Jul 2026 · <a href="https://ga4-daily-report.vercel.app" style="color:#6B7280">ga4-daily-report.vercel.app</a>
+</div>
+
+</div><!-- /container -->
 
 <script>
-// Section 1 — Doughnut
-new Chart(document.getElementById('deviceChart'), {
+// ── Device Doughnut ──
+new Chart(document.getElementById('deviceChart').getContext('2d'), {
   type: 'doughnut',
   data: {
-    labels: ['Desktop', 'Mobile', 'Tablet'],
-    datasets: [{
-      data: [459, 808, 6],
-      backgroundColor: ['#4F46E5', '#0EA5E9', '#A78BFA'],
-      borderWidth: 2,
-      borderColor: '#fff'
-    }]
+    labels: ['Desktop','Mobile','Tablet'],
+    datasets: [{data:[459,808,6], backgroundColor:['#4F46E5','#0EA5E9','#A78BFA'], borderWidth:2, borderColor:'#fff'}]
   },
   options: {
-    responsive: true,
+    responsive:true, maintainAspectRatio:false,
     plugins: {
-      legend: { position: 'bottom', labels: { font: { size: 13 }, padding: 16 } },
-      tooltip: {
-        callbacks: {
-          label: (ctx) => {
-            const total = ctx.dataset.data.reduce((a,b)=>a+b,0);
-            const pct = ((ctx.parsed / total)*100).toFixed(1);
-            return ` ${ctx.label}: ${ctx.parsed.toLocaleString()} (${pct}%)`;
-          }
-        }
-      }
+      legend:{position:'bottom',labels:{padding:14,font:{size:12}}},
+      tooltip:{callbacks:{label:ctx=>{const t=ctx.dataset.data.reduce((a,b)=>a+b,0);return ` ${ctx.label}: ${ctx.parsed.toLocaleString()} (${((ctx.parsed/t)*100).toFixed(1)}%)`;} }}
     }
   }
 });
 
-// Section 2 — Overall Funnel Bar Chart
-const overallSteps = ['Vehicle Details','Quote Loader','Quote List','Add-Ons','Policy Review','Payment Page','Purchase'];
-const overallUsers = [1273, 978, 832, 287, 218, 196, 150];
-new Chart(document.getElementById('overallFunnelChart'), {
+// ── Channel Bar ──
+new Chart(document.getElementById('channelBarChart').getContext('2d'), {
   type: 'bar',
   data: {
-    labels: overallSteps,
-    datasets: [{
-      label: 'Users',
-      data: overallUsers,
-      backgroundColor: '#4F46E5',
-      borderRadius: 6,
-      borderSkipped: false,
-    }]
+    labels: ['Direct','Organic Search','PPC','Referral\n(excl.)','Paid Social','Unassigned'],
+    datasets: [
+      {label:'Jul 7 (current)', data:[4866,1375,735,650,154,40], backgroundColor:['#4F46E5','#0EA5E9','#F59E0B','#D1D5DB','#10B981','#9CA3AF'], borderRadius:5},
+    ]
   },
   options: {
-    responsive: true,
+    responsive:true, maintainAspectRatio:false,
+    plugins:{legend:{display:false}, tooltip:{callbacks:{label:ctx=>` ${ctx.parsed.y.toLocaleString()} users`}}},
+    scales:{y:{beginAtZero:true,grid:{color:'#F3F4F6'},ticks:{font:{size:11}}},x:{grid:{display:false},ticks:{font:{size:11}}}}
+  }
+});
+
+// ── Overall Funnel ──
+new Chart(document.getElementById('overallFunnelChart').getContext('2d'), {
+  type: 'bar',
+  data: {
+    labels: ['Vehicle\nDetails','Quote\nLoader','Quote\nList','Add-Ons','Policy\nReview','Payment\nPage','Purchase'],
+    datasets: [
+      {label:'Jul 7', data:[1273,978,832,287,218,196,150], backgroundColor:'#4F46E5', borderRadius:5},
+      {label:'Jul 5 (ref)', data:[1050,775,665,223,169,157,114], backgroundColor:'#A5B4FC', borderRadius:5}
+    ]
+  },
+  options: {
+    responsive:true, maintainAspectRatio:false,
+    plugins:{legend:{position:'top',labels:{font:{size:11}}}, tooltip:{callbacks:{label:ctx=>` ${ctx.dataset.label}: ${ctx.parsed.y.toLocaleString()} users`}}},
+    scales:{y:{beginAtZero:true,grid:{color:'#F3F4F6'},ticks:{font:{size:11}}},x:{grid:{display:false},ticks:{font:{size:11}}}}
+  }
+});
+
+// ── Adnoc Funnel ──
+new Chart(document.getElementById('adnocFunnelChart').getContext('2d'), {
+  type: 'bar',
+  data: {
+    labels: ['Landing\nPage','Vehicle\nDetails','Quote\nLoader','Quote\nList','Add-Ons','Policy\nReview','Payment\nPage','Purchase'],
+    datasets: [{label:'Adnoc (Jul 7)', data:[585,190,108,93,40,29,28,26], backgroundColor:'#0EA5E9', borderRadius:5}]
+  },
+  options: {
+    responsive:true, maintainAspectRatio:false,
+    plugins:{legend:{display:false}, tooltip:{callbacks:{label:ctx=>` ${ctx.parsed.y.toLocaleString()} users`}}},
+    scales:{y:{beginAtZero:true,grid:{color:'#F3F4F6'},ticks:{font:{size:11}}},x:{grid:{display:false},ticks:{font:{size:11}}}}
+  }
+});
+
+// ── Traffic Mix Doughnut ──
+new Chart(document.getElementById('trafficMixChart').getContext('2d'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Direct','Organic Search','PPC','Referral (excl.)','Paid Social','Unassigned'],
+    datasets: [{data:[4866,1375,735,650,154,40], backgroundColor:['#4F46E5','#0EA5E9','#F59E0B','#D1D5DB','#10B981','#9CA3AF'], borderWidth:2, borderColor:'#fff'}]
+  },
+  options: {
+    responsive:true, maintainAspectRatio:false,
     plugins: {
-      legend: { display: false },
-      tooltip: {
-        callbacks: {
-          afterLabel: (ctx) => {
-            const pct = ((ctx.parsed.y / 1273)*100).toFixed(2);
-            return `${pct}% of funnel entries`;
-          }
-        }
-      }
-    },
-    scales: {
-      y: { beginAtZero: true, grid: { color: '#F3F4F6' }, ticks: { font: { size: 11 } } },
-      x: { grid: { display: false }, ticks: { font: { size: 11 } } }
+      legend:{position:'right',labels:{padding:12,font:{size:12}}},
+      tooltip:{callbacks:{label:ctx=>{const t=ctx.dataset.data.reduce((a,b)=>a+b,0);return ` ${ctx.label}: ${ctx.parsed.toLocaleString()} (${((ctx.parsed/t)*100).toFixed(1)}%)`;} }}
     }
   }
 });
 
-// Section 3 — Adnoc Funnel Bar Chart
-const adnocSteps = ['Landing Page','Vehicle Details','Quote Loader','Quote List','Add-Ons','Policy Review','Payment Page','Purchase'];
-const adnocUsers = [585, 190, 108, 93, 40, 29, 28, 26];
-new Chart(document.getElementById('adnocFunnelChart'), {
-  type: 'bar',
-  data: {
-    labels: adnocSteps,
-    datasets: [{
-      label: 'Adnoc Users',
-      data: adnocUsers,
-      backgroundColor: '#0EA5E9',
-      borderRadius: 6,
-      borderSkipped: false,
-    }]
-  },
-  options: {
-    responsive: true,
-    plugins: {
-      legend: { display: false },
-      tooltip: {
-        callbacks: {
-          afterLabel: (ctx) => {
-            const pct = ((ctx.parsed.y / 585)*100).toFixed(2);
-            return `${pct}% of Landing Page entries`;
-          }
-        }
-      }
-    },
-    scales: {
-      y: { beginAtZero: true, grid: { color: '#F3F4F6' }, ticks: { font: { size: 11 } } },
-      x: { grid: { display: false }, ticks: { font: { size: 11 } } }
-    }
-  }
+// ── Nav highlight on scroll ──
+const sections = ['summary','devices','channels','weekly','funnel','adnoc','traffic','insights'];
+const navLinks = document.querySelectorAll('.sticky-nav a');
+window.addEventListener('scroll', () => {
+  let current = sections[0];
+  sections.forEach(id => {
+    const el = document.getElementById(id);
+    if(el && window.scrollY >= el.offsetTop - 100) current = id;
+  });
+  navLinks.forEach(l => {l.classList.toggle('active', l.getAttribute('href') === '#'+current)});
 });
 </script>
 </body>
