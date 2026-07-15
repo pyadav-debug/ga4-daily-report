@@ -7,309 +7,444 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  body { background: #F9FAFB; font-family: system-ui, -apple-system, sans-serif; color: #111827; padding: 24px; }
+  body {
+    font-family: system-ui, -apple-system, sans-serif;
+    background: #F9FAFB;
+    color: #111827;
+    padding: 24px 16px;
+    min-width: 320px;
+  }
   .container { max-width: 1200px; margin: 0 auto; }
 
   /* Header */
-  .header { background: white; border-radius: 12px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); padding: 28px 32px; margin-bottom: 24px; }
+  .header {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    padding: 28px 32px;
+    margin-bottom: 24px;
+  }
   .header h1 { font-size: 26px; font-weight: 700; color: #111827; }
-  .header .subtitle { font-size: 14px; color: #6B7280; margin-top: 4px; }
-  .headline { margin-top: 14px; padding: 14px 18px; background: #EEF2FF; border-left: 4px solid #4F46E5; border-radius: 6px; font-size: 14px; color: #3730A3; line-height: 1.6; }
+  .header .subtitle { font-size: 15px; color: #6B7280; margin-top: 4px; }
+  .ai-headline {
+    margin-top: 14px;
+    background: #EEF2FF;
+    border-left: 4px solid #4F46E5;
+    border-radius: 0 8px 8px 0;
+    padding: 12px 16px;
+    font-size: 14px;
+    color: #3730A3;
+    font-weight: 500;
+  }
 
   /* Section */
-  .section { background: white; border-radius: 12px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); padding: 28px 32px; margin-bottom: 24px; }
-  .section h2 { font-size: 18px; font-weight: 700; color: #111827; margin-bottom: 20px; border-bottom: 1px solid #F3F4F6; padding-bottom: 12px; }
+  .section {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    padding: 28px 32px;
+    margin-bottom: 24px;
+  }
+  .section h2 {
+    font-size: 18px;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #F3F4F6;
+  }
 
   /* Device stats row */
-  .device-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 20px; }
-  .device-card { background: #F9FAFB; border-radius: 10px; padding: 18px 20px; text-align: center; }
-  .device-card .label { font-size: 12px; font-weight: 600; color: #6B7280; text-transform: uppercase; letter-spacing: 0.05em; }
-  .device-card .value { font-size: 28px; font-weight: 700; color: #111827; margin: 6px 0; }
-  .device-card .pct { font-size: 13px; color: #6B7280; }
-  .badge { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 11px; font-weight: 600; margin-left: 6px; }
-  .badge-na { background: #F3F4F6; color: #6B7280; }
+  .device-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 24px;
+  }
+  .device-stat-card {
+    background: #F9FAFB;
+    border-radius: 10px;
+    padding: 16px 20px;
+    text-align: center;
+  }
+  .device-stat-card .label { font-size: 13px; color: #6B7280; font-weight: 500; text-transform: uppercase; letter-spacing: 0.04em; }
+  .device-stat-card .value { font-size: 28px; font-weight: 700; color: #111827; margin: 6px 0; }
+  .delta-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .delta-na { background: #F3F4F6; color: #6B7280; }
 
-  /* Chart wrapper */
-  .chart-wrap { position: relative; height: 280px; margin-bottom: 8px; }
-
-  /* Funnel table */
-  .funnel-table { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 13px; }
-  .funnel-table th { text-align: left; padding: 8px 12px; font-size: 11px; font-weight: 600; color: #6B7280; text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 1px solid #E5E7EB; }
-  .funnel-table td { padding: 10px 12px; border-bottom: 1px solid #F3F4F6; vertical-align: middle; }
-  .funnel-table tr:last-child td { border-bottom: none; }
-  .funnel-table td:first-child { font-weight: 600; color: #111827; }
-  .funnel-table td.num { text-align: right; font-variant-numeric: tabular-nums; }
-  .drop-high { color: #DC2626; }
-  .drop-mid  { color: #D97706; }
-  .drop-low  { color: #059669; }
+  /* Chart containers */
+  .chart-wrap {
+    position: relative;
+    height: 280px;
+    margin-bottom: 24px;
+  }
+  .chart-wrap-donut {
+    position: relative;
+    height: 260px;
+    max-width: 300px;
+    margin: 0 auto 24px;
+  }
 
   /* KPI card */
-  .kpi-wrap { display: flex; gap: 16px; margin-top: 20px; flex-wrap: wrap; }
-  .kpi { flex: 1; min-width: 160px; background: #F9FAFB; border-left: 4px solid #4F46E5; border-radius: 8px; padding: 16px 20px; }
-  .kpi.adnoc { border-color: #0EA5E9; }
-  .kpi .kpi-label { font-size: 11px; font-weight: 600; color: #6B7280; text-transform: uppercase; letter-spacing: 0.05em; }
-  .kpi .kpi-value { font-size: 48px; font-weight: 700; color: #111827; line-height: 1.1; margin-top: 6px; }
-  .kpi .kpi-sub { font-size: 12px; color: #6B7280; margin-top: 4px; }
+  .kpi-card {
+    border-left: 4px solid #4F46E5;
+    background: #F9FAFB;
+    border-radius: 0 10px 10px 0;
+    padding: 18px 24px;
+    margin-bottom: 20px;
+  }
+  .kpi-card .kpi-label { font-size: 13px; color: #6B7280; font-weight: 500; text-transform: uppercase; letter-spacing: 0.04em; }
+  .kpi-card .kpi-value { font-size: 48px; font-weight: 700; color: #4F46E5; line-height: 1.1; margin-top: 4px; }
+  .kpi-card .kpi-sub { font-size: 13px; color: #6B7280; margin-top: 4px; }
+
+  .kpi-card-adnoc {
+    border-left: 4px solid #0EA5E9;
+  }
+  .kpi-card-adnoc .kpi-value { color: #0EA5E9; }
+
+  /* Tables */
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  thead th {
+    text-align: left;
+    padding: 10px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #6B7280;
+    background: #F9FAFB;
+    border-bottom: 1px solid #E5E7EB;
+  }
+  tbody td {
+    padding: 11px 12px;
+    border-bottom: 1px solid #F3F4F6;
+    color: #374151;
+  }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:hover { background: #FAFAFA; }
+  .step-name { font-weight: 600; color: #111827; }
+  .users-col { font-weight: 600; }
+  .pct-col { color: #6B7280; font-size: 13px; }
+  .drop-high { color: #DC2626; font-weight: 600; }
+  .drop-med { color: #D97706; font-weight: 600; }
+  .drop-low { color: #059669; font-weight: 600; }
 
   /* Comparison table */
-  .cmp-table { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 13px; }
-  .cmp-table th { text-align: left; padding: 8px 12px; font-size: 11px; font-weight: 600; color: #6B7280; text-transform: uppercase; border-bottom: 1px solid #E5E7EB; }
-  .cmp-table td { padding: 10px 12px; border-bottom: 1px solid #F3F4F6; font-size: 13px; }
-  .cmp-table tr:last-child td { border-bottom: none; }
-  .better { background: #D1FAE5; color: #065F46; padding: 2px 8px; border-radius: 4px; font-weight: 600; font-size: 12px; }
-  .worse  { background: #FEE2E2; color: #991B1B; padding: 2px 8px; border-radius: 4px; font-weight: 600; font-size: 12px; }
-  .same   { background: #F3F4F6; color: #374151; padding: 2px 8px; border-radius: 4px; font-weight: 600; font-size: 12px; }
+  .compare-table thead th:nth-child(2),
+  .compare-table tbody td:nth-child(2) { color: #4F46E5; }
+  .compare-table thead th:nth-child(3),
+  .compare-table tbody td:nth-child(3) { color: #0EA5E9; }
+  .compare-table thead th:nth-child(4),
+  .compare-table tbody td:nth-child(4) { font-weight: 600; }
+  .better { background: #D1FAE5; color: #065F46; border-radius: 4px; padding: 2px 6px; font-size: 12px; font-weight: 600; }
+  .worse { background: #FEE2E2; color: #991B1B; border-radius: 4px; padding: 2px 6px; font-size: 12px; font-weight: 600; }
+  .neutral { background: #F3F4F6; color: #6B7280; border-radius: 4px; padding: 2px 6px; font-size: 12px; font-weight: 600; }
 
-  @media (max-width: 700px) {
-    .device-row { grid-template-columns: 1fr; }
-    .kpi-wrap { flex-direction: column; }
+  /* Two-column layout for charts+kpi */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start; }
+  @media (max-width: 800px) {
+    .two-col { grid-template-columns: 1fr; }
+    .device-stats { grid-template-columns: 1fr; }
+    body { padding: 12px 8px; }
+    .section, .header { padding: 20px 16px; }
+  }
+
+  .section-note {
+    font-size: 13px;
+    color: #9CA3AF;
+    margin-bottom: 16px;
   }
 </style>
 </head>
 <body>
 <div class="container">
 
-  <!-- Header -->
+  <!-- HEADER -->
   <div class="header">
-    <div class="subtitle">Daily GA4 Report</div>
-    <h1>Monday, 14 Jul 2026</h1>
-    <div class="headline">
-      Overall funnel converts 10.3% of visitors (Vehicle Details &#8594; Purchase), while the Adnoc segment outperforms at 12.3% conversion — driven by stronger desktop traffic and a notably high Policy Review-to-Payment completion rate of 95.8%.
+    <h1>Daily GA4 Report</h1>
+    <div class="subtitle">Monday, 14 July 2026 &nbsp;·&nbsp; Motor Insurance Production &nbsp;·&nbsp; Property: a216941592 / p310968067</div>
+    <div class="ai-headline">
+      Desktop users convert at 13% vs 8.7% for mobile in the overall funnel — the biggest shared drop is Add-Ons (Quote List → Add-Ons: 33% completion), while the Adnoc segment outperforms overall at Vehicle Details onward with a 12.3% close rate vs 10.3%.
     </div>
   </div>
 
-  <!-- Section 1: Device Category -->
+  <!-- SECTION 1: DEVICE CATEGORY -->
   <div class="section">
-    <h2>Section 1 &mdash; Device Category (All Users)</h2>
-    <div class="chart-wrap" style="max-width:380px; margin: 0 auto;">
-      <canvas id="deviceChart"></canvas>
+    <h2>Section 1 — Device Category Breakdown</h2>
+    <p class="section-note">Users who reached Vehicle Details step · Jul 14, 2026 · All Users segment. Prior-day delta unavailable (single-day exploration date range).</p>
+    <div class="two-col">
+      <div>
+        <div class="chart-wrap-donut">
+          <canvas id="deviceChart"></canvas>
+        </div>
+      </div>
+      <div>
+        <div class="device-stats">
+          <div class="device-stat-card">
+            <div class="label">Mobile</div>
+            <div class="value">894</div>
+            <span class="delta-badge delta-na">Prior day N/A</span>
+          </div>
+          <div class="device-stat-card">
+            <div class="label">Desktop</div>
+            <div class="value">545</div>
+            <span class="delta-badge delta-na">Prior day N/A</span>
+          </div>
+          <div class="device-stat-card">
+            <div class="label">Tablet</div>
+            <div class="value">2</div>
+            <span class="delta-badge delta-na">Prior day N/A</span>
+          </div>
+        </div>
+        <div style="margin-top:20px;padding:14px;background:#F9FAFB;border-radius:8px;font-size:14px;color:#374151;">
+          <strong>Total:</strong> 1,441 users &nbsp;|&nbsp;
+          <strong>Mobile share:</strong> 62.0% &nbsp;|&nbsp;
+          <strong>Desktop share:</strong> 37.8% &nbsp;|&nbsp;
+          <strong>Tablet share:</strong> 0.1%
+        </div>
+      </div>
     </div>
-    <div class="device-row">
-      <div class="device-card">
-        <div class="label">Desktop</div>
-        <div class="value">545</div>
-        <div class="pct">37.8% of users <span class="badge badge-na">&#916; N/A</span></div>
-      </div>
-      <div class="device-card">
-        <div class="label">Mobile</div>
-        <div class="value">894</div>
-        <div class="pct">62.0% of users <span class="badge badge-na">&#916; N/A</span></div>
-      </div>
-      <div class="device-card">
-        <div class="label">Tablet</div>
-        <div class="value">2</div>
-        <div class="pct">0.1% of users <span class="badge badge-na">&#916; N/A</span></div>
-      </div>
-    </div>
-    <p style="font-size:11px;color:#9CA3AF;margin-top:12px;">Prior-day delta unavailable — comparison requires a separate GA4 query.</p>
   </div>
 
-  <!-- Section 2: Overall Funnel -->
+  <!-- SECTION 2: OVERALL FUNNEL -->
   <div class="section">
-    <h2>Section 2 &mdash; Overall Funnel (All Users Segment)</h2>
+    <h2>Section 2 — Overall Funnel (All Users)</h2>
+    <p class="section-note">All Users segment · Jul 14, 2026 · 7 steps from Vehicle Details to Purchase</p>
+
+    <div class="kpi-card">
+      <div class="kpi-label">Overall Conversion Rate (Vehicle Details → Purchase)</div>
+      <div class="kpi-value">10.34%</div>
+      <div class="kpi-sub">149 purchases from 1,441 users who reached Vehicle Details</div>
+    </div>
+
     <div class="chart-wrap">
-      <canvas id="overallChart"></canvas>
+      <canvas id="overallFunnelChart"></canvas>
     </div>
-    <table class="funnel-table">
+
+    <table>
       <thead>
         <tr>
           <th>#</th>
           <th>Step</th>
-          <th class="num">Users</th>
-          <th class="num">% of Step 1</th>
-          <th class="num">Drop-off %</th>
-          <th class="num">Cumulative Conv.</th>
+          <th>Users</th>
+          <th>% of Step 1</th>
+          <th>Drop-off %</th>
+          <th>Cumulative Completion</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td>1</td><td>Vehicle Details</td>
-          <td class="num">1,441</td><td class="num">100.0%</td>
-          <td class="num drop-high">26.16%</td><td class="num">100.0%</td>
+          <td>1</td><td class="step-name">Vehicle Details</td>
+          <td class="users-col">1,441</td>
+          <td class="pct-col">100%</td>
+          <td class="drop-low">26.16%</td>
+          <td>100%</td>
         </tr>
         <tr>
-          <td>2</td><td>Quote Loader Page</td>
-          <td class="num">1,064</td><td class="num">73.84%</td>
-          <td class="num drop-mid">11.18%</td><td class="num">73.84%</td>
+          <td>2</td><td class="step-name">Quote Loader Page – Quote Requested</td>
+          <td class="users-col">1,064</td>
+          <td class="pct-col">73.84%</td>
+          <td class="drop-low">11.18%</td>
+          <td>73.84%</td>
         </tr>
         <tr>
-          <td>3</td><td>Quote List</td>
-          <td class="num">945</td><td class="num">65.58%</td>
-          <td class="num drop-high">66.77%</td><td class="num">65.58%</td>
+          <td>3</td><td class="step-name">Quote List</td>
+          <td class="users-col">945</td>
+          <td class="pct-col">65.58%</td>
+          <td class="drop-high">66.77%</td>
+          <td>65.58%</td>
         </tr>
         <tr>
-          <td>4</td><td>Add-Ons</td>
-          <td class="num">314</td><td class="num">21.79%</td>
-          <td class="num drop-mid">25.16%</td><td class="num">21.79%</td>
+          <td>4</td><td class="step-name">Add-Ons</td>
+          <td class="users-col">314</td>
+          <td class="pct-col">21.79%</td>
+          <td class="drop-med">25.16%</td>
+          <td>21.79%</td>
         </tr>
         <tr>
-          <td>5</td><td>Policy Review</td>
-          <td class="num">235</td><td class="num">16.31%</td>
-          <td class="num drop-low">7.23%</td><td class="num">16.31%</td>
+          <td>5</td><td class="step-name">Policy Review</td>
+          <td class="users-col">235</td>
+          <td class="pct-col">16.31%</td>
+          <td class="drop-low">7.23%</td>
+          <td>16.31%</td>
         </tr>
         <tr>
-          <td>6</td><td>Payment Page</td>
-          <td class="num">218</td><td class="num">15.13%</td>
-          <td class="num drop-high">31.65%</td><td class="num">15.13%</td>
+          <td>6</td><td class="step-name">Payment Page</td>
+          <td class="users-col">218</td>
+          <td class="pct-col">15.13%</td>
+          <td class="drop-high">31.65%</td>
+          <td>15.13%</td>
         </tr>
         <tr>
-          <td>7</td><td>Purchase</td>
-          <td class="num">149</td><td class="num">10.34%</td>
-          <td class="num">&mdash;</td><td class="num">10.34%</td>
+          <td>7</td><td class="step-name">Purchase</td>
+          <td class="users-col">149</td>
+          <td class="pct-col">10.34%</td>
+          <td class="drop-low">—</td>
+          <td>10.34%</td>
         </tr>
       </tbody>
     </table>
-    <div class="kpi-wrap">
-      <div class="kpi">
-        <div class="kpi-label">Final Conversion Rate</div>
-        <div class="kpi-value">10.3%</div>
-        <div class="kpi-sub">Vehicle Details &#8594; Purchase (149 / 1,441)</div>
-      </div>
-      <div class="kpi">
-        <div class="kpi-label">Biggest Drop-off</div>
-        <div class="kpi-value" style="font-size:32px;color:#DC2626;">66.8%</div>
-        <div class="kpi-sub">Quote List &#8594; Add-Ons (631 users lost)</div>
-      </div>
-    </div>
   </div>
 
-  <!-- Section 3: Adnoc Funnel -->
+  <!-- SECTION 3: ADNOC FUNNEL -->
   <div class="section">
-    <h2>Section 3 &mdash; Adnoc Funnel (Adnoc Segment)</h2>
-    <div class="chart-wrap">
-      <canvas id="adnocChart"></canvas>
+    <h2>Section 3 — Adnoc Funnel</h2>
+    <p class="section-note">Adnoc segment · Jul 14, 2026 · 8 steps including Landing Page entry</p>
+
+    <div class="kpi-card kpi-card-adnoc">
+      <div class="kpi-label">Adnoc Conversion Rate (Landing Page → Purchase)</div>
+      <div class="kpi-value">4.46%</div>
+      <div class="kpi-sub">23 purchases from 516 users who reached the Adnoc Landing Page &nbsp;·&nbsp; Vehicle Details → Purchase: 12.3% (23/187)</div>
     </div>
-    <table class="funnel-table">
+
+    <div class="chart-wrap">
+      <canvas id="adnocFunnelChart"></canvas>
+    </div>
+
+    <table>
       <thead>
         <tr>
           <th>#</th>
           <th>Step</th>
-          <th class="num">Users</th>
-          <th class="num">% of Step 1</th>
-          <th class="num">Drop-off %</th>
-          <th class="num">Cumulative Conv.</th>
+          <th>Users</th>
+          <th>% of Step 1</th>
+          <th>Drop-off %</th>
+          <th>Cumulative Completion</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td>1</td><td>Landing Page</td>
-          <td class="num">516</td><td class="num">100.0%</td>
-          <td class="num drop-high">63.76%</td><td class="num">100.0%</td>
+          <td>1</td><td class="step-name">Landing Page</td>
+          <td class="users-col">516</td>
+          <td class="pct-col">100%</td>
+          <td class="drop-high">63.76%</td>
+          <td>100%</td>
         </tr>
         <tr>
-          <td>2</td><td>Vehicle Details</td>
-          <td class="num">187</td><td class="num">36.24%</td>
-          <td class="num drop-mid">40.11%</td><td class="num">36.24%</td>
+          <td>2</td><td class="step-name">Vehicle Details</td>
+          <td class="users-col">187</td>
+          <td class="pct-col">36.24%</td>
+          <td class="drop-med">40.11%</td>
+          <td>36.24%</td>
         </tr>
         <tr>
-          <td>3</td><td>Quote Loader Page</td>
-          <td class="num">112</td><td class="num">21.71%</td>
-          <td class="num drop-low">9.82%</td><td class="num">21.71%</td>
+          <td>3</td><td class="step-name">Quote Loader Page – Quote Requested</td>
+          <td class="users-col">112</td>
+          <td class="pct-col">21.71%</td>
+          <td class="drop-low">9.82%</td>
+          <td>21.71%</td>
         </tr>
         <tr>
-          <td>4</td><td>Quote List</td>
-          <td class="num">101</td><td class="num">19.57%</td>
-          <td class="num drop-high">66.34%</td><td class="num">19.57%</td>
+          <td>4</td><td class="step-name">Quote List</td>
+          <td class="users-col">101</td>
+          <td class="pct-col">19.57%</td>
+          <td class="drop-high">66.34%</td>
+          <td>19.57%</td>
         </tr>
         <tr>
-          <td>5</td><td>Add-Ons</td>
-          <td class="num">34</td><td class="num">6.59%</td>
-          <td class="num drop-mid">29.41%</td><td class="num">6.59%</td>
+          <td>5</td><td class="step-name">Add-Ons</td>
+          <td class="users-col">34</td>
+          <td class="pct-col">6.59%</td>
+          <td class="drop-med">29.41%</td>
+          <td>6.59%</td>
         </tr>
         <tr>
-          <td>6</td><td>Policy Review</td>
-          <td class="num">24</td><td class="num">4.65%</td>
-          <td class="num drop-low">4.17%</td><td class="num">4.65%</td>
+          <td>6</td><td class="step-name">Policy Review</td>
+          <td class="users-col">24</td>
+          <td class="pct-col">4.65%</td>
+          <td class="drop-low">4.17%</td>
+          <td>4.65%</td>
         </tr>
         <tr>
-          <td>7</td><td>Payment Page</td>
-          <td class="num">23</td><td class="num">4.46%</td>
-          <td class="num drop-low">0%</td><td class="num">4.46%</td>
+          <td>7</td><td class="step-name">Payment Page</td>
+          <td class="users-col">23</td>
+          <td class="pct-col">4.46%</td>
+          <td class="drop-low">0%</td>
+          <td>4.46%</td>
         </tr>
         <tr>
-          <td>8</td><td>Purchase</td>
-          <td class="num">23</td><td class="num">4.46%</td>
-          <td class="num">&mdash;</td><td class="num">4.46%</td>
+          <td>8</td><td class="step-name">Purchase</td>
+          <td class="users-col">23</td>
+          <td class="pct-col">4.46%</td>
+          <td class="drop-low">—</td>
+          <td>4.46%</td>
         </tr>
       </tbody>
     </table>
 
-    <div class="kpi-wrap">
-      <div class="kpi adnoc">
-        <div class="kpi-label">Adnoc Conversion (LP &#8594; Purchase)</div>
-        <div class="kpi-value">4.5%</div>
-        <div class="kpi-sub">23 / 516 from Landing Page</div>
-      </div>
-      <div class="kpi adnoc">
-        <div class="kpi-label">Adnoc Conversion (VD &#8594; Purchase)</div>
-        <div class="kpi-value">12.3%</div>
-        <div class="kpi-sub">23 / 187 from Vehicle Details</div>
-      </div>
-    </div>
-
-    <!-- Side-by-side comparison -->
-    <h3 style="font-size:15px;font-weight:700;margin-top:28px;margin-bottom:4px;">Step-by-Step: Overall vs. Adnoc Conversion</h3>
-    <p style="font-size:12px;color:#6B7280;margin-bottom:8px;">Cumulative % of users reaching each step from their respective starting point (Vehicle Details = step 1 for both).</p>
-    <table class="cmp-table">
+    <!-- Comparison mini-table: Overall vs Adnoc (from Vehicle Details onward) -->
+    <h3 style="font-size:15px;font-weight:700;margin:28px 0 12px;color:#374151;">Overall vs. Adnoc — Step Conversion Comparison (from Vehicle Details)</h3>
+    <p style="font-size:13px;color:#9CA3AF;margin-bottom:12px;">Adnoc step percentages re-based from Vehicle Details (187 users) for fair comparison.</p>
+    <table class="compare-table">
       <thead>
         <tr>
           <th>Step</th>
-          <th>Overall (All Users)</th>
-          <th>Adnoc Segment</th>
-          <th>Adnoc vs. Overall</th>
+          <th style="color:#4F46E5">Overall (All Users)</th>
+          <th style="color:#0EA5E9">Adnoc</th>
+          <th>Delta</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td>Vehicle Details</td>
-          <td>100.0% (1,441)</td>
-          <td>100.0% (187)</td>
-          <td><span class="same">= Baseline</span></td>
+          <td class="step-name">Vehicle Details</td>
+          <td>100% (1,441)</td>
+          <td>100% (187)</td>
+          <td><span class="neutral">Baseline</span></td>
         </tr>
         <tr>
-          <td>Quote Loader Page</td>
-          <td>73.8% (1,064)</td>
-          <td>59.9% (112)</td>
-          <td><span class="worse">&#9660; &minus;13.9pp</span></td>
+          <td class="step-name">Quote Loader Page</td>
+          <td>73.84%</td>
+          <td>59.89%</td>
+          <td><span class="worse">▼ -13.95pp</span></td>
         </tr>
         <tr>
-          <td>Quote List</td>
-          <td>65.6% (945)</td>
-          <td>54.0% (101)</td>
-          <td><span class="worse">&#9660; &minus;11.6pp</span></td>
+          <td class="step-name">Quote List</td>
+          <td>65.58%</td>
+          <td>54.01%</td>
+          <td><span class="worse">▼ -11.57pp</span></td>
         </tr>
         <tr>
-          <td>Add-Ons</td>
-          <td>21.8% (314)</td>
-          <td>18.2% (34)</td>
-          <td><span class="worse">&#9660; &minus;3.6pp</span></td>
+          <td class="step-name">Add-Ons</td>
+          <td>21.79%</td>
+          <td>18.18%</td>
+          <td><span class="worse">▼ -3.61pp</span></td>
         </tr>
         <tr>
-          <td>Policy Review</td>
-          <td>16.3% (235)</td>
-          <td>12.8% (24)</td>
-          <td><span class="worse">&#9660; &minus;3.5pp</span></td>
+          <td class="step-name">Policy Review</td>
+          <td>16.31%</td>
+          <td>12.83%</td>
+          <td><span class="worse">▼ -3.48pp</span></td>
         </tr>
         <tr>
-          <td>Payment Page</td>
-          <td>15.1% (218)</td>
-          <td>12.3% (23)</td>
-          <td><span class="worse">&#9660; &minus;2.8pp</span></td>
+          <td class="step-name">Payment Page</td>
+          <td>15.13%</td>
+          <td>12.30%</td>
+          <td><span class="worse">▼ -2.83pp</span></td>
         </tr>
         <tr>
-          <td>Purchase</td>
-          <td>10.3% (149)</td>
-          <td>12.3% (23)</td>
-          <td><span class="better">&#9650; +2.0pp</span></td>
+          <td class="step-name">Purchase</td>
+          <td>10.34%</td>
+          <td>12.30%</td>
+          <td><span class="better">▲ +1.96pp</span></td>
         </tr>
       </tbody>
     </table>
+  </div>
+
+  <div style="text-align:center;font-size:12px;color:#9CA3AF;padding:16px 0 8px;">
+    Generated automatically · Motor Insurance Production · GA4 Property a216941592/p310968067 · Data for Jul 14, 2026
   </div>
 
 </div>
 
 <script>
-// Device Doughnut
+// Section 1 — Device Donut Chart
 new Chart(document.getElementById('deviceChart'), {
   type: 'doughnut',
   data: {
@@ -322,14 +457,16 @@ new Chart(document.getElementById('deviceChart'), {
     }]
   },
   options: {
-    responsive: true, maintainAspectRatio: false,
+    responsive: true,
+    maintainAspectRatio: true,
     plugins: {
       legend: { position: 'bottom', labels: { padding: 16, font: { size: 13 } } },
       tooltip: {
         callbacks: {
           label: ctx => {
+            const val = ctx.raw;
             const total = ctx.dataset.data.reduce((a,b) => a+b, 0);
-            return ` ${ctx.label}: ${ctx.raw} (${(ctx.raw/total*100).toFixed(1)}%)`;
+            return ` ${ctx.label}: ${val.toLocaleString()} (${(val/total*100).toFixed(1)}%)`;
           }
         }
       }
@@ -337,48 +474,76 @@ new Chart(document.getElementById('deviceChart'), {
   }
 });
 
-// Overall Funnel Bar
-new Chart(document.getElementById('overallChart'), {
+// Section 2 — Overall Funnel Bar Chart
+const overallSteps = ['Vehicle\nDetails', 'Quote\nLoader', 'Quote\nList', 'Add-Ons', 'Policy\nReview', 'Payment\nPage', 'Purchase'];
+const overallUsers = [1441, 1064, 945, 314, 235, 218, 149];
+new Chart(document.getElementById('overallFunnelChart'), {
   type: 'bar',
   data: {
-    labels: ['Vehicle Details','Quote Loader','Quote List','Add-Ons','Policy Review','Payment Page','Purchase'],
+    labels: overallSteps,
     datasets: [{
       label: 'Users',
-      data: [1441, 1064, 945, 314, 235, 218, 149],
+      data: overallUsers,
       backgroundColor: '#4F46E5',
-      borderRadius: 5,
-      borderSkipped: false
+      borderRadius: 6,
+      barPercentage: 0.6
     }]
   },
   options: {
-    responsive: true, maintainAspectRatio: false,
-    plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => ` ${ctx.raw.toLocaleString()} users` } } },
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        callbacks: {
+          label: ctx => ` ${ctx.raw.toLocaleString()} users (${(ctx.raw/1441*100).toFixed(1)}% of Step 1)`
+        }
+      }
+    },
     scales: {
-      x: { grid: { display: false }, ticks: { font: { size: 11 } } },
-      y: { grid: { color: '#F3F4F6' }, ticks: { font: { size: 11 }, callback: v => v.toLocaleString() } }
+      x: { grid: { display: false }, ticks: { font: { size: 12 } } },
+      y: {
+        grid: { color: '#F3F4F6' },
+        ticks: { font: { size: 12 }, callback: v => v.toLocaleString() },
+        beginAtZero: true
+      }
     }
   }
 });
 
-// Adnoc Funnel Bar
-new Chart(document.getElementById('adnocChart'), {
+// Section 3 — Adnoc Funnel Bar Chart
+const adnocSteps = ['Landing\nPage', 'Vehicle\nDetails', 'Quote\nLoader', 'Quote\nList', 'Add-Ons', 'Policy\nReview', 'Payment\nPage', 'Purchase'];
+const adnocUsers = [516, 187, 112, 101, 34, 24, 23, 23];
+new Chart(document.getElementById('adnocFunnelChart'), {
   type: 'bar',
   data: {
-    labels: ['Landing Page','Vehicle Details','Quote Loader','Quote List','Add-Ons','Policy Review','Payment Page','Purchase'],
+    labels: adnocSteps,
     datasets: [{
       label: 'Users',
-      data: [516, 187, 112, 101, 34, 24, 23, 23],
+      data: adnocUsers,
       backgroundColor: '#0EA5E9',
-      borderRadius: 5,
-      borderSkipped: false
+      borderRadius: 6,
+      barPercentage: 0.6
     }]
   },
   options: {
-    responsive: true, maintainAspectRatio: false,
-    plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => ` ${ctx.raw.toLocaleString()} users` } } },
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        callbacks: {
+          label: ctx => ` ${ctx.raw.toLocaleString()} users (${(ctx.raw/516*100).toFixed(1)}% of Landing Page)`
+        }
+      }
+    },
     scales: {
-      x: { grid: { display: false }, ticks: { font: { size: 11 } } },
-      y: { grid: { color: '#F3F4F6' }, ticks: { font: { size: 11 }, callback: v => v.toLocaleString() } }
+      x: { grid: { display: false }, ticks: { font: { size: 12 } } },
+      y: {
+        grid: { color: '#F3F4F6' },
+        ticks: { font: { size: 12 }, callback: v => v.toLocaleString() },
+        beginAtZero: true
+      }
     }
   }
 });
