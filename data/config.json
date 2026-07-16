@@ -1,66 +1,66 @@
 {
-  "property_id": "310968067",
-  "analytics_account": "a216941592",
-  "timezone": "Asia/Dubai",
-  "channel_grouping": {
-    "direct": [
-      "Direct"
-    ],
-    "organic_search": [
-      "Organic Search"
-    ],
-    "ppc": [
-      "Paid Search",
-      "Cross-network",
-      "SMS",
-      "AI Assistant"
-    ],
-    "paid_social": [
-      "Paid Social",
-      "Organic Social"
-    ],
-    "unassigned": [
-      "Unassigned"
-    ],
-    "referral": [
-      "Referral"
-    ],
-    "other": [
-      "Display",
-      "Email",
-      "Paid Other",
-      "Paid Video"
-    ]
-  },
-  "overall_funnel_steps": [
-    "vehicle_details",
-    "quote_loader",
-    "quote_list",
-    "addons",
-    "policy_review",
-    "payment_page",
-    "purchase"
-  ],
-  "adnoc_funnel_steps": [
-    "landing_page",
-    "vehicle_details",
-    "quote_loader",
-    "quote_list",
-    "addons",
-    "policy_review",
-    "payment_page",
-    "purchase"
-  ],
-  "setup_complete": true,
-  "design": {
-    "version": "dark-dashboard-v1",
-    "approved": true,
-    "updated": "2026-07-15",
-    "notes": "Rebuilt index.html to match the Phase 1D approved spec: dark navy theme (#0F131C/#171D29/#6C63FF etc.), sticky top nav (Summary/Daily/Weekly/Channels/Funnel/Adnoc/Actions), Chart.js bar charts for Yesterday-vs-PrevDay, Week-vs-Week, Overall Funnel, and Adnoc Funnel, collapsed 'View calculation details' sections for weekly and funnel breakdowns, and abbreviated KPI numbers (e.g. 8.8K, AED 142K). This is now the locked approved design — recurring runs must only update data/values, not redesign. Do not revert to the old light theme."
-  },
-  "notifications": {
-    "slack_recipient": "Pramish Yadav (DM only, user_id U09PSG5V9D3)",
-    "rule": "Per explicit user instruction on 2026-07-15: Slack updates for this report must ONLY be sent as a DM to Pramish Yadav. Never post to #digital-marketing-team-firsttech or any other channel/user, even if earlier instructions said otherwise."
-  },
-  "last_updated": "2026-07-15T10:31:32Z"
-}{"property_id":"310968067","analytics_account":"a216941592","timezone":"Asia/Dubai","channel_grouping":{"direct":["Direct"],"organic_search":["Organic Search"],"ppc":["Paid Search","Cross-network","SMS","AI Assistant"],"paid_social":["Paid Social","Organic Social"],"unassigned":["Unassigned"],"referral":["Referral"],"other":["Display","Email","Paid Other","Paid Video"]},"overall_funnel_steps":["vehicle_details","quote_loader","quote_list","addons","policy_review","payment_page","purchase"],"adnoc_funnel_steps":["landing_page","vehicle_details","quote_loader","quote_list","addons","policy_review","payment_page","purchase"],"last_updated":"2026-07-15T10:31:32Z"}
+"property_id": "310968067",
+"analytics_account": "a216941592",
+"timezone": "Asia/Dubai",
+"channel_grouping": {
+"direct": [
+"Direct"
+],
+"organic_search": [
+"Organic Search"
+],
+"ppc": [
+"Paid Search",
+"Cross-network",
+"SMS",
+"AI Assistant"
+],
+"paid_social": [
+"Paid Social",
+"Organic Social"
+],
+"unassigned": [
+"Unassigned"
+],
+"referral": [
+"Referral"
+],
+"other": [
+"Display",
+"Email",
+"Paid Other",
+"Paid Video"
+]
+},
+"overall_funnel_steps": [
+"vehicle_details",
+"quote_loader",
+"quote_list",
+"addons",
+"policy_review",
+"payment_page",
+"purchase"
+],
+"adnoc_funnel_steps": [
+"landing_page",
+"vehicle_details",
+"quote_loader",
+"quote_list",
+"addons",
+"policy_review",
+"payment_page",
+"purchase"
+],
+"setup_complete": true,
+"design": {
+"version": "dark-dashboard-v1",
+"approved": true,
+"updated": "2026-07-15",
+"notes": "Rebuilt index.html to match the Phase 1D approved spec: dark navy theme (#0F131C/#171D29/#6C63FF etc.), sticky top nav (Summary/Daily/Weekly/Channels/Funnel/Adnoc/Actions), Chart.js bar charts for Yesterday-vs-PrevDay, Week-vs-Week, Overall Funnel, and Adnoc Funnel, collapsed 'View calculation details' sections for weekly and funnel breakdowns, and abbreviated KPI numbers (e.g. 8.8K, AED 142K). This is now the locked approved design — recurring runs must only update data/values, not redesign. Do not revert to the old light theme."
+},
+"notifications": {
+"slack_recipient": "Pramish Yadav (DM only, user_id U09PSG5V9D3)",
+"rule": "Per explicit user instruction on 2026-07-15: Slack updates for this report must ONLY be sent as a DM to Pramish Yadav. Never post to #digital-marketing-team-firsttech or any other channel/user, even if earlier instructions said otherwise."
+},
+"last_updated": "2026-07-16T07:03:36Z"
+}
