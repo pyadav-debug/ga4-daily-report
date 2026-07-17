@@ -62,10 +62,11 @@
 "slack_recipients": [
 {"type": "group_dm", "name": "GA4 Reporting - Motor UAE", "channel_id": "C0A8NFZSB0W"}
 ],
-"rule": "Per explicit user instruction on 2026-07-17: Slack updates for this report must be sent ONLY to the group DM 'GA4 Reporting - Motor UAE' (channel_id C0A8NFZSB0W). This replaces all prior destinations — do NOT DM Pramish Yadav (U09PSG5V9D3) individually, and do NOT post to #digital-marketing-team-firsttech (C0A9JR1NESX) or any other channel/user. Send to this single destination on every run."
+"rule": "Per explicit user instruction on 2026-07-17: Slack updates for this report must be sent ONLY to the group DM 'GA4 Reporting - Motor UAE' (channel_id C0A8NFZSB0W). This replaces all prior destinations — do NOT DM Pramish Yadav (U09PSG5V9D3) individually, and do NOT post to #digital-marketing-team-firsttech (C0A9JR1NESX) or any other channel/user. Send to this single destination on every run.",
+"tone_rule": "Per explicit user instruction on 2026-07-17: this group DM is a STAKEHOLDER-facing group, not an internal/working channel. Slack messages posted here must be clean and results-only — metrics, comparisons, and the report link. Do NOT mention data issues, bugs, corrections, discrepancies, methodology caveats, 'we found a problem', 'undercounting', or any other internal data-quality/engineering language. Any such issues should be tracked internally (e.g. in data_quality_notes below or report-log.json) and surfaced to the user directly in chat — never in the stakeholder Slack message itself."
 },
 "data_quality_notes": {
-"purchases_correction_2026_07_17": "On 2026-07-17 discovered that the 'purchases' metric had been sourced from the GA4 Funnel exploration's last step (Purchase), which undercounts by roughly half vs the true 'purchase' ecommerce event (GA4 also fires an unrelated, non-revenue 'Purchase' capitalized event that must be excluded). Revenue figures were confirmed correct throughout — only the purchase count was wrong. All daily files 2026-07-06 through 2026-07-16 were corrected using the true lowercase 'purchase' event count. Adnoc-segment purchase counts are still under review for the same issue."
+"purchases_correction_2026_07_17": "On 2026-07-17 discovered that the 'purchases' metric had been sourced from the GA4 Funnel exploration's last step (Purchase), which undercounts by roughly half vs the true 'purchase' ecommerce event (GA4 also fires an unrelated, non-revenue 'Purchase' capitalized event that must be excluded). Revenue figures were confirmed correct throughout — only the purchase count was wrong. All daily files 2026-07-06 through 2026-07-16 were corrected using the true lowercase 'purchase' event count. Adnoc-segment purchase counts are still under review for the same issue. This note is internal-only per the tone_rule above — do not surface it in stakeholder Slack messages."
 },
-"last_updated": "2026-07-17T12:40:00Z"
+"last_updated": "2026-07-17T12:55:00Z"
 }
