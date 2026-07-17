@@ -59,8 +59,11 @@
 "notes": "Rebuilt index.html to match the Phase 1D approved spec: dark navy theme (#0F131C/#171D29/#6C63FF etc.), sticky top nav (Summary/Daily/Weekly/Channels/Funnel/Adnoc/Actions), Chart.js bar charts for Yesterday-vs-PrevDay, Week-vs-Week, Overall Funnel, and Adnoc Funnel, collapsed 'View calculation details' sections for weekly and funnel breakdowns, and abbreviated KPI numbers (e.g. 8.8K, AED 142K). This is now the locked approved design — recurring runs must only update data/values, not redesign. Do not revert to the old light theme."
 },
 "notifications": {
-"slack_recipient": "Pramish Yadav (DM only, user_id U09PSG5V9D3)",
-"rule": "Per explicit user instruction on 2026-07-15: Slack updates for this report must ONLY be sent as a DM to Pramish Yadav. Never post to #digital-marketing-team-firsttech or any other channel/user, even if earlier instructions said otherwise."
+"slack_recipients": [
+{"type": "dm", "name": "Pramish Yadav", "user_id": "U09PSG5V9D3"},
+{"type": "channel", "name": "#digital-marketing-team-firsttech", "channel_id": "C0A9JR1NESX"}
+],
+"rule": "Per explicit user instruction on 2026-07-15, Slack updates for this report were DM-only to Pramish Yadav. Per explicit user instruction on 2026-07-17, this was expanded: Slack updates must now be sent BOTH as a DM to Pramish Yadav (user_id U09PSG5V9D3) AND posted to #digital-marketing-team-firsttech (channel_id C0A9JR1NESX). Send to both destinations on every run."
 },
-"last_updated": "2026-07-17T07:33:15Z"
+"last_updated": "2026-07-17T07:44:00Z"
 }
