@@ -1,0 +1,10 @@
+{
+  "date": "2026-07-19",
+  "last_updated": "2026-07-20T06:00:00Z",
+  "status": "validated",
+  "site": {"total_users":6215,"new_users":null,"sessions":7756,"engaged_sessions":null,"engagement_rate":null,"funnel_entrants":918,"purchases":92,"revenue":372378.31,"purchase_conversion_rate":0.1002},
+  "devices": {"desktop":581,"mobile":5558,"tablet":31},
+  "channels": {"direct":3451,"organic_search":992,"ppc":865,"paid_social":171,"unassigned":19,"referral":377,"other":298},
+  "overall_funnel": {"vehicle_details":918,"quote_loader":653,"quote_list":566,"addons":205,"policy_review":153,"payment_page":141,"purchase":92},
+  "adnoc_funnel": {"landing_page":315,"vehicle_details":119,"quote_loader":75,"quote_list":70,"addons":19,"policy_review":15,"payment_page":15,"purchase":10}
+}
