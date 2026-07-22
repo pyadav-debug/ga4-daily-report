@@ -1,0 +1,50 @@
+{
+    "date": "2026-07-21",
+    "last_updated": "2026-07-22T06:46:10Z",
+    "status": "validated; purchases use true GA4 Purchases metric (overall_funnel.purchase and adnoc_funnel.purchase remain funnel-step completion counts, unchanged)",
+    "site": {
+          "total_users": 7741,
+          "new_users": null,
+          "sessions": 10583,
+          "engaged_sessions": null,
+          "engagement_rate": null,
+          "funnel_entrants": 1367,
+          "purchases": 729,
+          "revenue": 580491.27,
+          "purchase_conversion_rate": 53.34
+    },
+    "devices": {
+          "desktop": 1068,
+          "mobile": 6643,
+          "tablet": 29
+    },
+    "channels": {
+          "direct": 4196,
+          "organic_search": 1416,
+          "ppc": 1304,
+          "paid_social": 184,
+          "unassigned": 22,
+          "referral": 533,
+          "other": 115
+    },
+    "overall_funnel": {
+          "vehicle_details": 1367,
+          "quote_loader": 1026,
+          "quote_list": 907,
+          "addons": 316,
+          "policy_review": 226,
+          "payment_page": 203,
+          "purchase": 149
+    },
+    "adnoc_funnel": {
+          "landing_page": 469,
+          "vehicle_details": 164,
+          "quote_loader": 98,
+          "quote_list": 89,
+          "addons": 30,
+          "policy_review": 16,
+          "payment_page": 15,
+          "purchase": 11
+    },
+    "adnoc_purchases": 15
+}
