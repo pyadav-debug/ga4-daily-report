@@ -1,0 +1,51 @@
+{
+    "date": "2026-07-23",
+    "last_updated": "2026-07-24T07:06:37Z",
+    "status": "validated; purchases use true GA4 Purchases metric (overall_funnel.purchase and adnoc_funnel.purchase remain funnel-step completion counts, unchanged)",
+    "site": {
+          "total_users": 9511,
+          "new_users": null,
+          "sessions": 12177,
+          "engaged_sessions": null,
+          "engagement_rate": null,
+          "funnel_entrants": 1362,
+          "purchases": 701,
+          "revenue": 627066.52,
+          "purchase_conversion_rate": 51.47
+    },
+    "devices": {
+          "desktop": 1154,
+          "mobile": 8295,
+          "tablet": 62
+    },
+    "channels": {
+          "direct": 4531,
+          "organic_search": 1648,
+          "ppc": 2237,
+          "paid_social": 327,
+          "unassigned": 20,
+          "referral": 500,
+          "other": 178
+    },
+    "overall_funnel": {
+          "vehicle_details": 1362,
+          "quote_loader": 1050,
+          "quote_list": 931,
+          "addons": 308,
+          "policy_review": 241,
+          "payment_page": 215,
+          "purchase": 163
+    },
+    "adnoc_funnel": {
+          "landing_page": 417,
+          "vehicle_details": 125,
+          "quote_loader": 77,
+          "quote_list": 69,
+          "addons": 19,
+          "policy_review": 15,
+          "payment_page": 12,
+          "purchase": 10
+    },
+    "adnoc_purchases": 15,
+    "data_quality_note": "Unassigned channel returned to normal range (20 users) on 2026-07-23, following the 2,013-user spike on 2026-07-22. The 22 Jul figure remains recorded as observed, uncorrected, and flagged as a likely tracking/attribution anomaly."
+}
