@@ -1,0 +1,12 @@
+{
+  "date": "2026-07-26",
+  "last_updated": "2026-07-27T07:05:00Z",
+  "status": "validated; purchases use true GA4 Purchases metric (overall_funnel.purchase and adnoc_funnel.purchase remain funnel-step completion counts, unchanged); Previous Day comparison uses last validated day (23 Jul, 3-day gap - 24-25 Jul not collected)",
+  "site": {"total_users":9384,"new_users":null,"sessions":11563,"engaged_sessions":null,"engagement_rate":null,"funnel_entrants":1030,"purchases":555,"revenue":483419.23,"purchase_conversion_rate":53.88},
+  "devices": {"desktop":589,"mobile":8714,"tablet":78},
+  "channels": {"direct":4127,"organic_search":1260,"ppc":3177,"paid_social":271,"unassigned":17,"referral":417,"other":36},
+  "overall_funnel": {"vehicle_details":1030,"quote_loader":769,"quote_list":710,"addons":225,"policy_review":156,"payment_page":138,"purchase":111},
+  "adnoc_funnel": {"landing_page":330,"vehicle_details":127,"quote_loader":77,"quote_list":75,"addons":18,"policy_review":14,"payment_page":13,"purchase":13},
+  "adnoc_purchases": 19,
+  "data_quality_note": "2026-07-24 and 2026-07-25 were not collected (one-new-day-per-run policy after a multi-day gap since the last run on 2026-07-24). Previous Day comparison for this run therefore uses 2026-07-23 (3 days prior) rather than a true consecutive day. 26 Jul (Sunday) is also being compared against 23 Jul (Thursday), spanning the Fri-Sat weekend; declines in Funnel Entrants, Purchases and Revenue vs 23 Jul should be read with this gap and day-of-week difference in mind rather than as a single-day shock."
+}
