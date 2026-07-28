@@ -3,266 +3,267 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shory Motor GA4 Report — Sunday, 26 Jul 2026</title>
+<title>Shory Motor GA4 Report — Monday, 27 Jul 2026</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
-  :root{
-    --bg:#0F131C; --card:#171D29; --card2:#1C2331; --border:#2A3342;
-    --text:#F8FAFC; --muted:#94A3B8; --accent:#6C63FF; --prev:#64748B;
-    --pos:#10B981; --warn:#F59E0B; --crit:#EF4444;
-  }
-  *{box-sizing:border-box;margin:0;padding:0}
-  body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.5;font-size:15px}
-  a{color:var(--accent);text-decoration:none}
-  .wrap{max-width:1080px;margin:0 auto;padding:0 20px 60px}
-  nav{position:sticky;top:0;z-index:20;background:rgba(15,19,28,.92);backdrop-filter:blur(6px);border-bottom:1px solid var(--border)}
-  nav .nav-inner{max-width:1080px;margin:0 auto;padding:12px 20px;display:flex;gap:6px;align-items:center;flex-wrap:wrap}
-  nav .brand{font-weight:700;margin-right:14px;font-size:15px}
-  nav a{color:var(--muted);padding:6px 10px;border-radius:8px;font-size:13px}
-  nav a:hover{color:var(--text);background:var(--card2)}
-  header.head{padding:28px 0 10px}
-  header.head h1{font-size:22px;font-weight:700}
-  header.head .date{color:var(--muted);margin-top:2px}
-  .metaline{color:var(--muted);font-size:13px;margin-top:10px}
-  .metaline b{color:var(--text);font-weight:600}
-  .pill-live{display:inline-block;background:rgba(16,185,129,.15);color:var(--pos);border:1px solid rgba(16,185,129,.4);border-radius:20px;padding:2px 10px;font-size:12px;font-weight:600}
-  section{margin-top:34px}
-  h2{font-size:16px;font-weight:700;margin-bottom:14px;letter-spacing:.2px}
-  .sub{color:var(--muted);font-size:13px;margin:-6px 0 14px}
-  .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-  .kpi{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px}
-  .kpi .name{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.5px}
-  .kpi .val{font-size:26px;font-weight:700;margin-top:6px}
-  .kpi .val.small{font-size:18px}
-  .kpi .chg{font-size:13px;margin-top:6px}
-  .up{color:var(--pos)} .down{color:var(--crit)}
-  .items{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:14px}
-  .item{background:var(--card2);border:1px solid var(--border);border-radius:12px;padding:12px 14px;font-size:14px}
-  .item b{display:block;color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
-  .tablecard{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden}
-  table{width:100%;border-collapse:collapse;font-size:14px}
-  th,td{padding:11px 14px;text-align:left;border-bottom:1px solid var(--border)}
-  th{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.4px;font-weight:600}
-  td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
-  tr:last-child td{border-bottom:none}
-  .status{display:inline-block;padding:2px 9px;border-radius:20px;font-size:11px;font-weight:700;white-space:nowrap}
-  .s-strong{background:rgba(16,185,129,.15);color:var(--pos)}
-  .s-normal{background:rgba(148,163,184,.15);color:var(--muted)}
-  .s-watch{background:rgba(245,158,11,.15);color:var(--warn)}
-  .s-attn{background:rgba(245,158,11,.2);color:var(--warn)}
-  .s-crit{background:rgba(239,68,68,.15);color:var(--crit)}
-  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-  .minicard{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px}
-  .minicard .name{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.5px}
-  .minicard .big{font-size:18px;font-weight:700;margin-top:6px}
-  .chartbox{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;margin-top:14px}
-  .chartbox canvas{max-height:300px}
-  .oneline{background:var(--card2);border:1px solid var(--border);border-radius:12px;padding:12px 14px;color:var(--muted);font-size:14px;margin-top:14px}
-  details{background:var(--card2);border:1px solid var(--border);border-radius:12px;margin-top:14px}
-  details summary{cursor:pointer;padding:12px 14px;color:var(--accent);font-size:13px;font-weight:600;list-style:none}
-  details summary::-webkit-details-marker{display:none}
-  details .body{padding:0 14px 14px;color:var(--muted);font-size:13px}
-  ul.actions{list-style:none;display:grid;gap:10px}
-  ul.actions li{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px 14px;font-size:14px}
-  ul.actions li b{color:var(--accent);font-size:12px;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:3px}
-  ul.notes{list-style:none;display:grid;gap:8px}
-  ul.notes li{color:var(--muted);font-size:13px;padding-left:16px;position:relative}
-  ul.notes li::before{content:"•";position:absolute;left:2px;color:var(--accent)}
-  footer{margin-top:40px;color:var(--muted);font-size:12px;border-top:1px solid var(--border);padding-top:16px}
-  @media (max-width:720px){
-    .kpis,.grid3{grid-template-columns:1fr}
-    .items,.grid2{grid-template-columns:1fr}
-    header.head h1{font-size:19px}
-    th,td{padding:9px 10px;font-size:13px}
-  }
+:root{
+--bg:#0F131C; --card:#171D29; --card2:#1C2331; --border:#2A3342;
+--text:#F8FAFC; --muted:#94A3B8; --accent:#6C63FF; --prev:#64748B;
+--pos:#10B981; --warn:#F59E0B; --crit:#EF4444;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.5;font-size:15px}
+a{color:var(--accent);text-decoration:none}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px 60px}
+nav{position:sticky;top:0;z-index:20;background:rgba(15,19,28,.92);backdrop-filter:blur(6px);border-bottom:1px solid var(--border)}
+nav .nav-inner{max-width:1080px;margin:0 auto;padding:12px 20px;display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+nav .brand{font-weight:700;margin-right:14px;font-size:15px}
+nav a{color:var(--muted);padding:6px 10px;border-radius:8px;font-size:13px}
+nav a:hover{color:var(--text);background:var(--card2)}
+header.head{padding:28px 0 10px}
+header.head h1{font-size:22px;font-weight:700}
+header.head .date{color:var(--muted);margin-top:2px}
+.metaline{color:var(--muted);font-size:13px;margin-top:10px}
+.metaline b{color:var(--text);font-weight:600}
+.pill-live{display:inline-block;background:rgba(16,185,129,.15);color:var(--pos);border:1px solid rgba(16,185,129,.4);border-radius:20px;padding:2px 10px;font-size:12px;font-weight:600}
+section{margin-top:34px}
+h2{font-size:16px;font-weight:700;margin-bottom:14px;letter-spacing:.2px}
+.sub{color:var(--muted);font-size:13px;margin:-6px 0 14px}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.kpi{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px}
+.kpi .name{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.5px}
+.kpi .val{font-size:26px;font-weight:700;margin-top:6px}
+.kpi .val.small{font-size:18px}
+.kpi .chg{font-size:13px;margin-top:6px}
+.up{color:var(--pos)} .down{color:var(--crit)}
+.items{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:14px}
+.item{background:var(--card2);border:1px solid var(--border);border-radius:12px;padding:12px 14px;font-size:14px}
+.item b{display:block;color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.tablecard{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{padding:11px 14px;text-align:left;border-bottom:1px solid var(--border)}
+th{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.4px;font-weight:600}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+tr:last-child td{border-bottom:none}
+.status{display:inline-block;padding:2px 9px;border-radius:20px;font-size:11px;font-weight:700;white-space:nowrap}
+.s-strong{background:rgba(16,185,129,.15);color:var(--pos)}
+.s-normal{background:rgba(148,163,184,.15);color:var(--muted)}
+.s-watch{background:rgba(245,158,11,.15);color:var(--warn)}
+.s-attn{background:rgba(245,158,11,.2);color:var(--warn)}
+.s-crit{background:rgba(239,68,68,.15);color:var(--crit)}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.minicard{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px}
+.minicard .name{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.5px}
+.minicard .big{font-size:18px;font-weight:700;margin-top:6px}
+.chartbox{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;margin-top:14px}
+.chartbox canvas{max-height:300px}
+.oneline{background:var(--card2);border:1px solid var(--border);border-radius:12px;padding:12px 14px;color:var(--muted);font-size:14px;margin-top:14px}
+details{background:var(--card2);border:1px solid var(--border);border-radius:12px;margin-top:14px}
+details summary{cursor:pointer;padding:12px 14px;color:var(--accent);font-size:13px;font-weight:600;list-style:none}
+details summary::-webkit-details-marker{display:none}
+details .body{padding:0 14px 14px;color:var(--muted);font-size:13px}
+ul.actions{list-style:none;display:grid;gap:10px}
+ul.actions li{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px 14px;font-size:14px}
+ul.actions li b{color:var(--accent);font-size:12px;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:3px}
+ul.notes{list-style:none;display:grid;gap:8px}
+ul.notes li{color:var(--muted);font-size:13px;padding-left:16px;position:relative}
+ul.notes li::before{content:"•";position:absolute;left:2px;color:var(--accent)}
+footer{margin-top:40px;color:var(--muted);font-size:12px;border-top:1px solid var(--border);padding-top:16px}
+@media (max-width:720px){
+.kpis,.grid3{grid-template-columns:1fr}
+.items,.grid2{grid-template-columns:1fr}
+header.head h1{font-size:19px}
+th,td{padding:9px 10px;font-size:13px}
+}
 </style>
 </head>
 <body>
 
 <nav>
-  <div class="nav-inner">
-    <span class="brand">Shory Motor GA4</span>
-    <a href="#summary">Summary</a>
-    <a href="#daily">Daily</a>
-    <a href="#weekly">Weekly</a>
-    <a href="#channels">Channels</a>
-    <a href="#funnel">Funnel</a>
-    <a href="#adnoc">Adnoc</a>
-    <a href="#actions">Actions</a>
-  </div>
+<div class="nav-inner">
+<span class="brand">Shory Motor GA4</span>
+<a href="#summary">Summary</a>
+<a href="#daily">Daily</a>
+<a href="#weekly">Weekly</a>
+<a href="#channels">Channels</a>
+<a href="#funnel">Funnel</a>
+<a href="#adnoc">Adnoc</a>
+<a href="#actions">Actions</a>
+</div>
 </nav>
 
 <div class="wrap">
 
-  <header class="head">
-    <h1>Shory Motor GA4 Report</h1>
-    <div class="date">Sunday, 26 July 2026</div>
-    <div class="metaline">
-      Yesterday: <b>26 Jul vs 25 Jul</b> &nbsp;·&nbsp; This week: <b>20–26 Jul vs 13–19 Jul</b>
-    </div>
-    <div class="metaline">Updated 27 Jul, 11:20 GST &nbsp;·&nbsp; Data: complete (both weeks, all 7 days) &nbsp;·&nbsp; <span class="pill-live">Live</span></div>
-  </header>
+<header class="head">
+<h1>Shory Motor GA4 Report</h1>
+<div class="date">Monday, 27 July 2026</div>
+<div class="metaline">
+Yesterday: <b>27 Jul vs 26 Jul</b> &nbsp;·&nbsp; This week: <b>27 Jul vs 20–26 Jul avg</b>
+</div>
+<div class="metaline">Updated 28 Jul, 11:15 GST &nbsp;·&nbsp; Data: Yesterday complete · This week 1 of 7 days collected · Last week complete (7 of 7) &nbsp;·&nbsp; <span class="pill-live">Live</span></div>
+</header>
 
-  <!-- SUMMARY -->
-  <section id="summary">
-    <h2>Summary</h2>
-    <div class="kpis">
-      <div class="kpi"><div class="name">Total Users</div><div class="val">9.4K</div><div class="chg down">▼ 3.7% vs prev day</div></div>
-      <div class="kpi"><div class="name">Funnel Entrants</div><div class="val">1.0K</div><div class="chg down">▼ 13.7% vs prev day</div></div>
-      <div class="kpi"><div class="name">Purchases</div><div class="val">111</div><div class="chg down">▼ 17.8% vs prev day</div></div>
-      <div class="kpi"><div class="name">Purchase Conversion Rate</div><div class="val">10.8%</div><div class="chg down">▼ 0.54pp vs prev day</div></div>
-      <div class="kpi"><div class="name">Revenue</div><div class="val">AED 483K</div><div class="chg down">▼ 21.0% vs prev day</div></div>
-      <div class="kpi"><div class="name">Biggest Drop-off</div><div class="val small">Quote List → Add-Ons</div><div class="chg">68.3% leave here</div></div>
-    </div>
-    <div class="items">
-      <div class="item"><b>Went up</b>PPC (+72%) and Paid Social (+60%) are far ahead of last week.</div>
-      <div class="item"><b>Went down</b>Sunday's purchases (-17.8%) and revenue (-21%) were below Saturday.</div>
-      <div class="item"><b>Watch</b>Adnoc purchase rate is a little below last week (3.1% vs 3.5%).</div>
-      <div class="item"><b>Do next</b>Fix the Quote List → Add-Ons drop-off — the biggest leak.</div>
-    </div>
-  </section>
+<!-- SUMMARY -->
+<section id="summary">
+<h2>Summary</h2>
+<div class="kpis">
+<div class="kpi"><div class="name">Total Users</div><div class="val">11.3K</div><div class="chg up">▲ 20.4% vs prev day</div></div>
+<div class="kpi"><div class="name">Funnel Entrants</div><div class="val">1.7K</div><div class="chg up">▲ 61.5% vs prev day</div></div>
+<div class="kpi"><div class="name">Purchases</div><div class="val">189</div><div class="chg up">▲ 70.3% vs prev day</div></div>
+<div class="kpi"><div class="name">Purchase Conversion Rate</div><div class="val">11.4%</div><div class="chg up">▲ 0.59pp vs prev day</div></div>
+<div class="kpi"><div class="name">Revenue</div><div class="val">AED 893K</div><div class="chg up">▲ 84.8% vs prev day</div></div>
+<div class="kpi"><div class="name">Biggest Drop-off</div><div class="val small">Quote List → Add-Ons</div><div class="chg">63.8% leave here</div></div>
+</div>
+<div class="items">
+<div class="item"><b>Went up</b>Monday's traffic, funnel entrants and revenue jumped well above Sunday and last week's daily average.</div>
+<div class="item"><b>Went down</b>PPC (-33.3%) and Paid Social (-29.2%) users fell versus Sunday, and Paid Social is also below last week's average.</div>
+<div class="item"><b>Main issue</b>Unassigned channel spiked to 3,321 users (vs a 306/day week average) — the second such spike this week.</div>
+<div class="item"><b>Do next</b>Investigate the recurring Unassigned channel tracking/attribution anomaly.</div>
+</div>
+</section>
 
-  <!-- DAILY -->
-  <section id="daily">
-    <h2>Yesterday vs Previous Day</h2>
-    <p class="sub">Sun 26 Jul compared with Sat 25 Jul.</p>
-    <div class="tablecard">
-      <table>
-        <thead><tr><th>KPI</th><th class="num">Yesterday</th><th class="num">Prev day</th><th class="num">Change</th><th>Status</th></tr></thead>
-        <tbody>
-          <tr><td>Total Users</td><td class="num">9,384</td><td class="num">9,743</td><td class="num down">-3.7%</td><td><span class="status s-normal">Normal</span></td></tr>
-          <tr><td>Sessions</td><td class="num">11,563</td><td class="num">12,908</td><td class="num down">-10.4%</td><td><span class="status s-normal">Normal</span></td></tr>
-          <tr><td>Funnel Entrants</td><td class="num">1,030</td><td class="num">1,193</td><td class="num down">-13.7%</td><td><span class="status s-watch">Watch</span></td></tr>
-          <tr><td>Purchases</td><td class="num">111</td><td class="num">135</td><td class="num down">-17.8%</td><td><span class="status s-watch">Watch</span></td></tr>
-          <tr><td>Revenue</td><td class="num">AED 483,419</td><td class="num">AED 611,971</td><td class="num down">-21.0%</td><td><span class="status s-attn">Needs Attention</span></td></tr>
-          <tr><td>Purchase Conversion Rate</td><td class="num">10.78%</td><td class="num">11.32%</td><td class="num down">-0.54pp</td><td><span class="status s-normal">Normal</span></td></tr>
-          <tr><td>PPC Users</td><td class="num">3,177</td><td class="num">3,079</td><td class="num up">+3.2%</td><td><span class="status s-normal">Normal</span></td></tr>
-          <tr><td>Paid Social Users</td><td class="num">271</td><td class="num">265</td><td class="num up">+2.3%</td><td><span class="status s-normal">Normal</span></td></tr>
-          <tr><td>Adnoc Purchases</td><td class="num">13</td><td class="num">18</td><td class="num down">-27.8%</td><td><span class="status s-attn">Needs Attention</span></td></tr>
-        </tbody>
-      </table>
-    </div>
+<!-- DAILY -->
+<section id="daily">
+<h2>Yesterday vs Previous Day</h2>
+<p class="sub">Mon 27 Jul compared with Sun 26 Jul.</p>
+<div class="tablecard">
+<table>
+<thead><tr><th>KPI</th><th class="num">Yesterday</th><th class="num">Prev day</th><th class="num">Change</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td>Total Users</td><td class="num">11,297</td><td class="num">9,384</td><td class="num up">+20.4%</td><td><span class="status s-strong">Strong</span></td></tr>
+<tr><td>Sessions</td><td class="num">15,275</td><td class="num">11,563</td><td class="num up">+32.1%</td><td><span class="status s-strong">Strong</span></td></tr>
+<tr><td>Funnel Entrants</td><td class="num">1,663</td><td class="num">1,030</td><td class="num up">+61.5%</td><td><span class="status s-strong">Strong</span></td></tr>
+<tr><td>Purchases</td><td class="num">189</td><td class="num">111</td><td class="num up">+70.3%</td><td><span class="status s-strong">Strong</span></td></tr>
+<tr><td>Revenue</td><td class="num">AED 893,209</td><td class="num">AED 483,419</td><td class="num up">+84.8%</td><td><span class="status s-strong">Strong</span></td></tr>
+<tr><td>Purchase Conversion Rate</td><td class="num">11.36%</td><td class="num">10.78%</td><td class="num up">+0.59pp</td><td><span class="status s-normal">Normal</span></td></tr>
+<tr><td>PPC Users</td><td class="num">2,120</td><td class="num">3,177</td><td class="num down">-33.3%</td><td><span class="status s-attn">Needs Attention</span></td></tr>
+<tr><td>Paid Social Users</td><td class="num">192</td><td class="num">271</td><td class="num down">-29.2%</td><td><span class="status s-attn">Needs Attention</span></td></tr>
+<tr><td>Adnoc Purchases</td><td class="num">17</td><td class="num">13</td><td class="num up">+30.8%</td><td><span class="status s-strong">Strong</span></td></tr>
+</tbody>
+</table>
+</div>
 
-    <div class="chartbox"><canvas id="dailyChart"></canvas></div>
+<div class="chartbox"><canvas id="dailyChart"></canvas></div>
 
-    <div class="grid3" style="margin-top:14px">
-      <div class="minicard"><div class="name">Mobile</div><div class="big">8,714</div><div class="sub" style="margin:4px 0 0">92.9% of users · 25 Jul 8,987</div></div>
-      <div class="minicard"><div class="name">Desktop</div><div class="big">589</div><div class="sub" style="margin:4px 0 0">6.3% of users · 25 Jul 668</div></div>
-      <div class="minicard"><div class="name">Tablet</div><div class="big">78</div><div class="sub" style="margin:4px 0 0">0.8% of users · 25 Jul 80</div></div>
-    </div>
+<div class="grid3" style="margin-top:14px">
+<div class="minicard"><div class="name">Mobile</div><div class="big">9,912</div><div class="sub" style="margin:4px 0 0">87.7% of users · 26 Jul 8,714</div></div>
+<div class="minicard"><div class="name">Desktop</div><div class="big">1,269</div><div class="sub" style="margin:4px 0 0">11.2% of users · 26 Jul 589</div></div>
+<div class="minicard"><div class="name">Tablet</div><div class="big">76</div><div class="sub" style="margin:4px 0 0">0.7% of users · 26 Jul 78</div></div>
+</div>
 
-    <div class="tablecard" style="margin-top:14px">
-      <table>
-        <thead><tr><th>Day</th><th class="num">Direct</th><th class="num">Organic</th><th class="num">PPC</th><th class="num">Paid Social</th><th class="num">Referral</th><th class="num">Total</th></tr></thead>
-        <tbody>
-          <tr><td>Sat, 25 Jul</td><td class="num">4,537</td><td class="num">1,507</td><td class="num">3,079</td><td class="num">265</td><td class="num">332</td><td class="num">9,743</td></tr>
-          <tr><td>Sun, 26 Jul</td><td class="num">4,127</td><td class="num">1,260</td><td class="num">3,177</td><td class="num">271</td><td class="num">417</td><td class="num">9,384</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
+<div class="tablecard" style="margin-top:14px">
+<table>
+<thead><tr><th>Day</th><th class="num">Direct</th><th class="num">Organic</th><th class="num">PPC</th><th class="num">Paid Social</th><th class="num">Referral</th><th class="num">Total</th></tr></thead>
+<tbody>
+<tr><td>Sun, 26 Jul</td><td class="num">4,127</td><td class="num">1,260</td><td class="num">3,177</td><td class="num">271</td><td class="num">417</td><td class="num">9,384</td></tr>
+<tr><td>Mon, 27 Jul</td><td class="num">6,002</td><td class="num">1,308</td><td class="num">2,120</td><td class="num">192</td><td class="num">677</td><td class="num">11,297</td></tr>
+</tbody>
+</table>
+</div>
+</section>
 
-  <!-- WEEKLY -->
-  <section id="weekly">
-    <h2>This Week vs Last Week</h2>
-    <p class="sub">Daily average · 20–26 Jul vs 13–19 Jul (both full 7-day weeks).</p>
-    <div class="tablecard">
-      <table>
-        <thead><tr><th>KPI</th><th class="num">This week/day</th><th class="num">Last week/day</th><th class="num">Change</th><th>Status</th></tr></thead>
-        <tbody>
-          <tr><td>Total Users</td><td class="num">8,715</td><td class="num">8,145</td><td class="num up">+7.0%</td><td><span class="status s-normal">Normal</span></td></tr>
-          <tr><td>Direct</td><td class="num">4,346</td><td class="num">4,641</td><td class="num down">-6.4%</td><td><span class="status s-normal">Normal</span></td></tr>
-          <tr><td>Organic Search</td><td class="num">1,391</td><td class="num">1,519</td><td class="num down">-8.5%</td><td><span class="status s-normal">Normal</span></td></tr>
-          <tr><td>PPC</td><td class="num">2,049</td><td class="num">1,191</td><td class="num up">+72.0%</td><td><span class="status s-strong">Strong</span></td></tr>
-          <tr><td>Paid Social</td><td class="num">243</td><td class="num">152</td><td class="num up">+60.2%</td><td><span class="status s-strong">Strong</span></td></tr>
-          <tr><td>Funnel Entrants</td><td class="num">1,250</td><td class="num">1,224</td><td class="num up">+2.2%</td><td><span class="status s-normal">Normal</span></td></tr>
-          <tr><td>Purchases</td><td class="num">135</td><td class="num">135</td><td class="num up">+0.1%</td><td><span class="status s-normal">Normal</span></td></tr>
-          <tr><td>Revenue</td><td class="num">AED 563K</td><td class="num">AED 276K</td><td class="num up">+104.4%</td><td><span class="status s-strong">Strong</span></td></tr>
-          <tr><td>Purchase Conversion Rate</td><td class="num">10.79%</td><td class="num">11.01%</td><td class="num down">-0.22pp</td><td><span class="status s-normal">Normal</span></td></tr>
-          <tr><td>Adnoc Conversion Rate</td><td class="num">3.11%</td><td class="num">3.53%</td><td class="num down">-0.42pp</td><td><span class="status s-watch">Watch</span></td></tr>
-        </tbody>
-      </table>
-    </div>
+<!-- WEEKLY -->
+<section id="weekly">
+<h2>This Week vs Last Week</h2>
+<p class="sub">Daily average · 27 Jul (1 of 7 days so far) vs 20–26 Jul (full 7-day week).</p>
+<div class="tablecard">
+<table>
+<thead><tr><th>KPI</th><th class="num">This week/day</th><th class="num">Last week/day</th><th class="num">Change</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td>Total Users</td><td class="num">11,297</td><td class="num">8,715</td><td class="num up">+29.6%</td><td><span class="status s-strong">Strong</span></td></tr>
+<tr><td>Direct</td><td class="num">6,002</td><td class="num">4,346</td><td class="num up">+38.1%</td><td><span class="status s-strong">Strong</span></td></tr>
+<tr><td>Organic Search</td><td class="num">1,308</td><td class="num">1,391</td><td class="num down">-5.9%</td><td><span class="status s-normal">Normal</span></td></tr>
+<tr><td>PPC</td><td class="num">2,120</td><td class="num">2,049</td><td class="num up">+3.5%</td><td><span class="status s-normal">Normal</span></td></tr>
+<tr><td>Paid Social</td><td class="num">192</td><td class="num">243</td><td class="num down">-21.1%</td><td><span class="status s-attn">Needs Attention</span></td></tr>
+<tr><td>Funnel Entrants</td><td class="num">1,663</td><td class="num">1,250</td><td class="num up">+33.0%</td><td><span class="status s-strong">Strong</span></td></tr>
+<tr><td>Purchases</td><td class="num">189</td><td class="num">135</td><td class="num up">+40.1%</td><td><span class="status s-strong">Strong</span></td></tr>
+<tr><td>Revenue</td><td class="num">AED 893K</td><td class="num">AED 563K</td><td class="num up">+58.6%</td><td><span class="status s-strong">Strong</span></td></tr>
+<tr><td>Purchase Conversion Rate</td><td class="num">11.36%</td><td class="num">10.79%</td><td class="num up">+0.58pp</td><td><span class="status s-normal">Normal</span></td></tr>
+<tr><td>Adnoc Conversion Rate</td><td class="num">2.98%</td><td class="num">3.11%</td><td class="num down">-0.13pp</td><td><span class="status s-normal">Normal</span></td></tr>
+</tbody>
+</table>
+</div>
 
-    <div class="chartbox"><canvas id="weeklyChart"></canvas></div>
+<div class="chartbox"><canvas id="weeklyChart"></canvas></div>
 
-    <details>
-      <summary>View calculation details</summary>
-      <div class="body">
-        Each figure is the average per day. This week uses all 7 days (20–26 Jul); last week uses all 7 days (13–19 Jul). Rates are the week's total purchases divided by the week's total entrants.
-      </div>
-    </details>
-  </section>
+<details>
+<summary>View calculation details</summary>
+<div class="body">
+This week has only 1 of 7 days collected so far (27 Jul), so "This week/day" is that single day's actual value. Last week (20–26 Jul) is a complete 7-day average: This Week Total (single day) = 11,297 users / 1,663 entrants / 189 purchases / AED 893,209 revenue. Last Week Total = 61,008 users / 8,752 entrants / 944 purchases / AED 3,943,056 revenue, ÷7 days = the averages shown. Rates are each period's total purchases divided by that period's total entrants. Because this week is a single Monday compared with a full last-week average, the gap is expected to narrow as more days of this week are collected.
+</div>
+</details>
+</section>
 
-  <!-- CHANNELS -->
-  <section id="channels">
-    <h2>Traffic Channels</h2>
-    <p class="sub">Daily average this week vs last week.</p>
-    <div class="tablecard">
-      <table>
-        <thead><tr><th>Channel</th><th class="num">This week/day</th><th class="num">Last week/day</th><th class="num">Change</th><th>Status</th></tr></thead>
-        <tbody>
-          <tr><td>Direct</td><td class="num">4,346</td><td class="num">4,641</td><td class="num down">-6.4%</td><td><span class="status s-normal">Normal</span></td></tr>
-          <tr><td>Organic Search</td><td class="num">1,391</td><td class="num">1,519</td><td class="num down">-8.5%</td><td><span class="status s-normal">Normal</span></td></tr>
-          <tr><td>PPC</td><td class="num">2,049</td><td class="num">1,191</td><td class="num up">+72.0%</td><td><span class="status s-strong">Strong</span></td></tr>
-          <tr><td>Paid Social</td><td class="num">243</td><td class="num">152</td><td class="num up">+60.2%</td><td><span class="status s-strong">Strong</span></td></tr>
-          <tr><td>Referral</td><td class="num">462</td><td class="num">487</td><td class="num down">-5.0%</td><td><span class="status s-normal">Normal</span></td></tr>
-          <tr><td>Unassigned</td><td class="num">306</td><td class="num">28</td><td class="num">high</td><td><span class="status s-crit">One-off spike</span></td></tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="oneline">Unassigned is lifted by a one-day spike on 22 Jul (2,013 vs the usual 20–30/day).</div>
-  </section>
+<!-- CHANNELS -->
+<section id="channels">
+<h2>Traffic Channels</h2>
+<p class="sub">27 Jul (1 day so far) vs last week's daily average.</p>
+<div class="tablecard">
+<table>
+<thead><tr><th>Channel</th><th class="num">This week/day</th><th class="num">Last week/day</th><th class="num">Change</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td>Direct</td><td class="num">6,002</td><td class="num">4,346</td><td class="num up">+38.1%</td><td><span class="status s-strong">Strong</span></td></tr>
+<tr><td>Organic Search</td><td class="num">1,308</td><td class="num">1,391</td><td class="num down">-5.9%</td><td><span class="status s-normal">Normal</span></td></tr>
+<tr><td>PPC</td><td class="num">2,120</td><td class="num">2,049</td><td class="num up">+3.5%</td><td><span class="status s-normal">Normal</span></td></tr>
+<tr><td>Paid Social</td><td class="num">192</td><td class="num">243</td><td class="num down">-21.1%</td><td><span class="status s-attn">Needs Attention</span></td></tr>
+<tr><td>Referral</td><td class="num">677</td><td class="num">462</td><td class="num up">+46.4%</td><td><span class="status s-strong">Strong</span></td></tr>
+<tr><td>Unassigned</td><td class="num">3,321</td><td class="num">306</td><td class="num up">high</td><td><span class="status s-crit">One-off spike</span></td></tr>
+</tbody>
+</table>
+</div>
+<div class="oneline">Unassigned spiked again on 27 Jul (3,321 vs a 306/day week average) — the second one-day spike this week after 22 Jul (2,013).</div>
+</section>
 
-  <!-- FUNNEL -->
-  <section id="funnel">
-    <h2>Overall Funnel</h2>
-    <p class="sub">People at each step, yesterday (26 Jul).</p>
-    <div class="chartbox"><canvas id="funnelChart"></canvas></div>
-    <div class="grid2" style="margin-top:14px">
-      <div class="minicard"><div class="name">Biggest drop-off</div><div class="big">Quote List → Add-Ons</div><div class="sub" style="margin:4px 0 0">68.3% leave here</div></div>
-      <div class="minicard"><div class="name">Weakest step vs prev day</div><div class="big">Payment Page</div><div class="sub" style="margin:4px 0 0">-25.4% vs 25 Jul</div></div>
-    </div>
-    <div class="oneline">Most people drop off between Quote List and Add-Ons — the biggest place to win back sales.</div>
-  </section>
+<!-- FUNNEL -->
+<section id="funnel">
+<h2>Overall Funnel</h2>
+<p class="sub">People at each step, yesterday (27 Jul).</p>
+<div class="chartbox"><canvas id="funnelChart"></canvas></div>
+<div class="grid2" style="margin-top:14px">
+<div class="minicard"><div class="name">Biggest drop-off</div><div class="big">Quote List → Add-Ons</div><div class="sub" style="margin:4px 0 0">63.8% leave here</div></div>
+<div class="minicard"><div class="name">Weakest step vs prev day</div><div class="big">Quote List</div><div class="sub" style="margin:4px 0 0">+54.2% vs 26 Jul (slowest growth)</div></div>
+</div>
+<div class="oneline">Most people drop off between Quote List and Add-Ons — the biggest place to win back sales.</div>
+</section>
 
-  <!-- ADNOC -->
-  <section id="adnoc">
-    <h2>Adnoc Funnel</h2>
-    <p class="sub">People at each step, yesterday (26 Jul).</p>
-    <div class="grid3">
-      <div class="minicard"><div class="name">Adnoc Conversion Rate</div><div class="big">3.94%</div><div class="sub" style="margin:4px 0 0">yesterday</div></div>
-      <div class="minicard"><div class="name">Adnoc vs Overall</div><div class="big">3.94% vs 10.78%</div><div class="sub" style="margin:4px 0 0">lower than the site overall</div></div>
-      <div class="minicard"><div class="name">Largest drop-off</div><div class="big">Quote List → Add-Ons</div><div class="sub" style="margin:4px 0 0">76% leave here</div></div>
-    </div>
-    <div class="chartbox"><canvas id="adnocChart"></canvas></div>
-    <div class="oneline">Adnoc's purchase rate this week (3.1%) is slightly below last week (3.5%).</div>
-  </section>
+<!-- ADNOC -->
+<section id="adnoc">
+<h2>Adnoc Funnel</h2>
+<p class="sub">People at each step, yesterday (27 Jul).</p>
+<div class="grid3">
+<div class="minicard"><div class="name">Adnoc Conversion Rate</div><div class="big">2.98%</div><div class="sub" style="margin:4px 0 0">yesterday</div></div>
+<div class="minicard"><div class="name">Adnoc vs Overall</div><div class="big">2.98% vs 11.36%</div><div class="sub" style="margin:4px 0 0">lower than the site overall</div></div>
+<div class="minicard"><div class="name">Largest drop-off</div><div class="big">Quote List → Add-Ons</div><div class="sub" style="margin:4px 0 0">61.6% leave here</div></div>
+</div>
+<div class="chartbox"><canvas id="adnocChart"></canvas></div>
+<div class="oneline">Adnoc's purchase rate this week (2.98%, 1 day so far) is below last week's average (3.11%).</div>
+</section>
 
-  <!-- ACTIONS -->
-  <section id="actions">
-    <h2>What To Do Next</h2>
-    <ul class="actions">
-      <li><b>Funnel</b>Fix the Quote List → Add-Ons drop-off — the biggest leak in the journey.</li>
-      <li><b>Adnoc</b>Keep an eye on the Adnoc purchase rate, a little below last week.</li>
-      <li><b>Traffic</b>PPC and Paid Social are strong; Direct and Organic Search are slightly softer.</li>
-    </ul>
-  </section>
+<!-- ACTIONS -->
+<section id="actions">
+<h2>What To Do Next</h2>
+<ul class="actions">
+<li><b>Funnel</b>Fix the Quote List → Add-Ons drop-off — the biggest leak in the journey.</li>
+<li><b>Adnoc</b>Keep an eye on the Adnoc purchase rate, below last week's average.</li>
+<li><b>Traffic</b>Investigate the Unassigned channel — this is the second spike this week (27 Jul: 3,321; 22 Jul: 2,013) and needs a tracking/attribution review.</li>
+</ul>
+</section>
 
-  <!-- NOTES -->
-  <section id="notes">
-    <h2>Data Notes</h2>
-    <ul class="notes">
-      <li>Both weeks now cover all 7 days (13–19 and 20–26 Jul).</li>
-      <li>Unassigned had a one-day spike on 22 Jul (2,013 vs usual 20–30/day), still lifting this week's average.</li>
-      <li>All numbers come straight from GA4; nothing is estimated.</li>
-    </ul>
-  </section>
+<!-- NOTES -->
+<section id="notes">
+<h2>Data Notes</h2>
+<ul class="notes">
+<li>This week has 1 of 7 days collected so far (27 Jul); last week (20–26 Jul) is a complete 7-day average.</li>
+<li>Unassigned spiked to 3,321 users on 27 Jul, a second spike after 2,013 on 22 Jul — reported as observed, not corrected or estimated, and flagged as a likely recurring tracking/attribution issue.</li>
+<li>27 Jul (Monday) is compared with 26 Jul (Sunday); day-of-week effects likely explain part of the jump in Total Users, Funnel Entrants and Purchases, alongside the Unassigned anomaly.</li>
+<li>All numbers come straight from GA4; nothing is estimated.</li>
+</ul>
+</section>
 
-  <footer>
-    Shory Motor · Motor Insurance Production · GA4 property a216941592/p310968067 · Data for 26 Jul 2026.
-  </footer>
+<footer>
+Shory Motor · Motor Insurance Production · GA4 property a216941592/p310968067 · Data for 27 Jul 2026.
+</footer>
 
 </div>
 
@@ -271,43 +272,43 @@ const purple = '#6C63FF', prev = '#64748B', grid = '#2A3342', muted = '#94A3B8';
 Chart.defaults.color = muted;
 Chart.defaults.font.family = "-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif";
 const baseOpts = {
-  responsive:true, maintainAspectRatio:false,
-  plugins:{legend:{labels:{boxWidth:12,font:{size:12}}}},
-  scales:{x:{grid:{color:grid},ticks:{font:{size:11}}},y:{grid:{color:grid},ticks:{font:{size:11}},beginAtZero:true}}
+responsive:true, maintainAspectRatio:false,
+plugins:{legend:{labels:{boxWidth:12,font:{size:12}}}},
+scales:{x:{grid:{color:grid},ticks:{font:{size:11}}},y:{grid:{color:grid},ticks:{font:{size:11}},beginAtZero:true}}
 };
 
 new Chart(document.getElementById('dailyChart'),{
-  type:'bar',
-  data:{labels:["Total Users","Sessions","Funnel Entrants","Purchases (x10)"],
-    datasets:[
-      {label:"Yesterday (26 Jul)",data:[9384,11563,1030,1110],backgroundColor:purple,borderRadius:4},
-      {label:"Previous Day (25 Jul)",data:[9743,12908,1193,1350],backgroundColor:prev,borderRadius:4}
-    ]},
-  options:baseOpts
+type:'bar',
+data:{labels:["Total Users","Sessions","Funnel Entrants","Purchases (x10)"],
+datasets:[
+{label:"Yesterday (27 Jul)",data:[11297,15275,1663,1890],backgroundColor:purple,borderRadius:4},
+{label:"Previous Day (26 Jul)",data:[9384,11563,1030,1110],backgroundColor:prev,borderRadius:4}
+]},
+options:baseOpts
 });
 
 new Chart(document.getElementById('weeklyChart'),{
-  type:'bar',
-  data:{labels:["Total Users","Funnel Entrants","Purchases (x10)"],
-    datasets:[
-      {label:"This Week Avg/Day",data:[8715.4,1250.3,1349],backgroundColor:purple,borderRadius:4},
-      {label:"Last Week Avg/Day",data:[8144.7,1223.9,1347],backgroundColor:prev,borderRadius:4}
-    ]},
-  options:baseOpts
+type:'bar',
+data:{labels:["Total Users","Funnel Entrants","Purchases (x10)"],
+datasets:[
+{label:"This Week Avg/Day",data:[11297,1663,1890],backgroundColor:purple,borderRadius:4},
+{label:"Last Week Avg/Day",data:[8715.4,1250.3,1349],backgroundColor:prev,borderRadius:4}
+]},
+options:baseOpts
 });
 
 new Chart(document.getElementById('funnelChart'),{
-  type:'bar',
-  data:{labels:["Vehicle Details","Quote Loader","Quote List","Add-Ons","Policy Review","Payment Page","Purchase"],
-    datasets:[{label:"Users (26 Jul)",data:[1030,769,710,225,156,138,111],backgroundColor:purple,borderRadius:4}]},
-  options:{...baseOpts, indexAxis:'y', plugins:{legend:{display:false}}}
+type:'bar',
+data:{labels:["Vehicle Details","Quote Loader","Quote List","Add-Ons","Policy Review","Payment Page","Purchase"],
+datasets:[{label:"Users (27 Jul)",data:[1663,1224,1095,396,302,253,189],backgroundColor:purple,borderRadius:4}]},
+options:{...baseOpts, indexAxis:'y', plugins:{legend:{display:false}}}
 });
 
 new Chart(document.getElementById('adnocChart'),{
-  type:'bar',
-  data:{labels:["Landing Page","Vehicle Details","Quote Loader","Quote List","Add-Ons","Policy Review","Payment Page","Purchase"],
-    datasets:[{label:"Users (26 Jul)",data:[330,127,77,75,18,14,13,13],backgroundColor:purple,borderRadius:4}]},
-  options:{...baseOpts, indexAxis:'y', plugins:{legend:{display:false}}}
+type:'bar',
+data:{labels:["Landing Page","Vehicle Details","Quote Loader","Quote List","Add-Ons","Policy Review","Payment Page","Purchase"],
+datasets:[{label:"Users (27 Jul)",data:[570,177,94,86,33,21,19,17],backgroundColor:purple,borderRadius:4}]},
+options:{...baseOpts, indexAxis:'y', plugins:{legend:{display:false}}}
 });
 </script>
 </body>
