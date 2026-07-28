@@ -276,6 +276,15 @@ responsive:true, maintainAspectRatio:false,
 plugins:{legend:{labels:{boxWidth:12,font:{size:12}}}},
 scales:{x:{grid:{color:grid},ticks:{font:{size:11}}},y:{grid:{color:grid},ticks:{font:{size:11}},beginAtZero:true}}
 };
+const hBarOpts = {
+responsive:true, maintainAspectRatio:false,
+plugins:{legend:{display:false}},
+indexAxis:'y',
+scales:{
+x:{type:'linear',beginAtZero:true,grid:{color:grid},ticks:{font:{size:11}}},
+y:{type:'category',grid:{color:grid},ticks:{font:{size:11}}}
+}
+};
 
 new Chart(document.getElementById('dailyChart'),{
 type:'bar',
@@ -301,14 +310,14 @@ new Chart(document.getElementById('funnelChart'),{
 type:'bar',
 data:{labels:["Vehicle Details","Quote Loader","Quote List","Add-Ons","Policy Review","Payment Page","Purchase"],
 datasets:[{label:"Users (27 Jul)",data:[1663,1224,1095,396,302,253,189],backgroundColor:purple,borderRadius:4}]},
-options:{...baseOpts, indexAxis:'y', plugins:{legend:{display:false}}}
+options:hBarOpts
 });
 
 new Chart(document.getElementById('adnocChart'),{
 type:'bar',
 data:{labels:["Landing Page","Vehicle Details","Quote Loader","Quote List","Add-Ons","Policy Review","Payment Page","Purchase"],
 datasets:[{label:"Users (27 Jul)",data:[570,177,94,86,33,21,19,17],backgroundColor:purple,borderRadius:4}]},
-options:{...baseOpts, indexAxis:'y', plugins:{legend:{display:false}}}
+options:hBarOpts
 });
 </script>
 </body>
