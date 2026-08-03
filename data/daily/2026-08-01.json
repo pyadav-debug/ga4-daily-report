@@ -1,0 +1,22 @@
+{
+  "date": "2026-08-01",
+  "last_updated": "2026-08-03T09:00:00Z",
+  "status": "validated; purchases use true GA4 Purchases metric (overall_funnel.purchase and adnoc_funnel.purchase remain funnel-step completion counts, unchanged)",
+  "site": {
+    "total_users": 7998,
+    "new_users": null,
+    "sessions": 11046,
+    "engaged_sessions": null,
+    "engagement_rate": null,
+    "funnel_entrants": 1153,
+    "purchases": 775,
+    "revenue": 627856.41,
+    "purchase_conversion_rate": 67.22
+  },
+  "devices": {"desktop": 735, "mobile": 7221, "tablet": 48},
+  "channels": {"direct": 4254, "organic_search": 1162, "ppc": 1927, "paid_social": 171, "unassigned": 15, "referral": 413, "other": 45},
+  "overall_funnel": {"vehicle_details": 1153, "quote_loader": 854, "quote_list": 787, "addons": 284, "policy_review": 222, "payment_page": 200, "purchase": 162},
+  "adnoc_funnel": {"landing_page": 293, "vehicle_details": 118, "quote_loader": 79, "quote_list": 75, "addons": 28, "policy_review": 20, "payment_page": 20, "purchase": 17},
+  "adnoc_purchases": 22,
+  "data_quality_note": "Collected retroactively on 2026-08-03 as part of a 3-day backfill (Jul 31-Aug 2) following a scheduled-run gap during a week off; no automated run executed for this date at the time. Device totals (8,004) and channel totals (7,987) for this date each differ slightly from the reported Total Users (7,998); this is normal GA4 cross-dimension user overlap, not a data error."
+}
