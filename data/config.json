@@ -64,22 +64,24 @@
         "type": "group_dm",
         "name": "GA4 Reporting - Motor UAE",
         "channel_id": "C0A8NFZSB0W",
-        "content": "stakeholder_highlights_only",
-        "rule": "STAKEHOLDER-facing. Send only positive/neutral highlights: key metrics, wins, and the report link. Never mention data issues, corrections, bugs, discrepancies, or methodology caveats here."
+        "content": "stakeholder_comparisons_only",
+        "rule": "STAKEHOLDER-facing. Format: KPI comparisons only (this vs that, with the % or pp change) — no explanations, no narrative, no framing of anything as a problem, risk, or concern, whether it's a business metric (e.g. revenue, PPC, purchases dipping) or a data-quality/methodology matter. Do not include 'Main issue', 'Action', causes, or recommendations. If a line would read as flagging an issue in any subtle way, it does not belong here — move it to #digital-marketing-team-firsttech instead. Only include: the metric name, the two values being compared, the change, and the report link.",
+        "example_format": "✅ Shory Motor GA4 report updated\n\nData: [Yesterday] vs [Previous Day]\nThis week: [dates] vs [dates]\nTotal Users: [value] ([+/-X%])\nPurchases: [value] ([+/-X%])\nRevenue: [value] ([+/-X%])\nReport: [link]"
       },
       {
         "type": "channel",
         "name": "#digital-marketing-team-firsttech",
         "channel_id": "C0A9JR1NESX",
         "content": "internal_issues_and_corrections",
-        "rule": "INTERNAL working channel. Send data-quality issues, corrections, methodology notes, and anything flagged as a problem or caveat here instead of the stakeholder group DM. Can also receive the same highlights as the stakeholder group if relevant."
+        "rule": "INTERNAL working channel. Anything that is or reads as an issue goes here instead of the stakeholder group DM — this includes business performance concerns (metric declines, softness, underperformance vs benchmarks), not just data-quality/methodology issues. Send data-quality issues, corrections, methodology notes, business performance concerns, and anything flagged as a problem or caveat here. Can also receive the same comparisons sent to the stakeholder group if relevant."
       }
     ],
-    "rule": "Per explicit user instructions on 2026-07-17: (1) Do NOT DM Pramish Yadav (U09PSG5V9D3) individually anymore. (2) Send positive/results-only highlights to the group DM 'GA4 Reporting - Motor UAE' (C0A8NFZSB0W) — this is a stakeholder-facing group, keep it clean, no issues/corrections/methodology language. (3) Send any data-quality issues, corrections, or caveats to #digital-marketing-team-firsttech (C0A9JR1NESX) instead — this is the internal working channel for that kind of content."
+    "rule": "Per explicit user instructions on 2026-07-17 and 2026-08-03: (1) Do NOT DM Pramish Yadav (U09PSG5V9D3) individually anymore. (2) Send ONLY plain KPI comparisons (metric, this value vs that value, % change, report link) to the group DM 'GA4 Reporting - Motor UAE' (C0A8NFZSB0W) — no explanations, no narrative, and no issue framing of any kind, business or data-quality, not even subtly (e.g. no 'Main issue', 'Action needed', causes, or recommendations). (3) Send anything that is or reads as an issue — data-quality issues, corrections, caveats, AND business performance concerns like metric softness or underperformance — to #digital-marketing-team-firsttech (C0A9JR1NESX) instead."
   },
   "data_quality_notes": {
     "purchases_correction_2026_07_17": "On 2026-07-17 discovered that the 'purchases' metric had been sourced from the GA4 Funnel exploration's last step (Purchase), which undercounts by roughly half vs the true 'purchase' ecommerce event (GA4 also fires an unrelated, non-revenue 'Purchase' capitalized event that must be excluded). Revenue figures were confirmed correct throughout — only the purchase count was wrong. All daily files 2026-07-06 through 2026-07-16 were corrected using the true lowercase 'purchase' event count. Adnoc-segment purchase counts are still under review for the same issue. Per the notifications rule above, this kind of note goes to #digital-marketing-team-firsttech, never to the stakeholder group DM.",
-    "week_off_gap_2026_07_31_to_08_02": "No scheduled run executed for 2026-07-31, 2026-08-01, or 2026-08-02 due to a week off (team out of office); the automation itself was not broken. Backfilled retroactively on 2026-08-03 by pulling all three missing days directly from the GA4 exploration (Overall Funnel, Adnoc Funnel, Device Category Analysis with Adnoc segment comparison, and Channel Acquisition tabs), following the same methodology as other validated daily files. All three days are now marked status: validated. Per the notifications rule above, this note is informational/internal and should not be surfaced in the stakeholder-facing Slack group DM."
+    "week_off_gap_2026_07_31_to_08_02": "No scheduled run executed for 2026-07-31, 2026-08-01, or 2026-08-02 due to a week off (team out of office); the automation itself was not broken. Backfilled retroactively on 2026-08-03 by pulling all three missing days directly from the GA4 exploration (Overall Funnel, Adnoc Funnel, Device Category Analysis with Adnoc segment comparison, and Channel Acquisition tabs), following the same methodology as other validated daily files. All three days are now marked status: validated. Per the notifications rule above, this note is informational/internal and should not be surfaced in the stakeholder-facing Slack group DM.",
+    "stakeholder_message_correction_2026_08_03": "On 2026-08-03 the stakeholder group DM message incorrectly included 'Main issue' and 'Action' lines describing a business performance dip (revenue softness). This was caught and corrected by the user: the stakeholder rule was tightened to explicitly exclude ANY issue framing (business or data-quality) — comparisons only, no explanations. Business performance concerns must now go to #digital-marketing-team-firsttech instead."
   },
-  "last_updated": "2026-08-03T09:00:00Z"
+  "last_updated": "2026-08-03T09:30:00Z"
 }
