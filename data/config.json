@@ -1,84 +1,85 @@
 {
-"property_id": "310968067",
-"analytics_account": "a216941592",
-"timezone": "Asia/Dubai",
-"channel_grouping": {
-"direct": [
-"Direct"
-],
-"organic_search": [
-"Organic Search"
-],
-"ppc": [
-"Paid Search",
-"Cross-network",
-"SMS",
-"AI Assistant"
-],
-"paid_social": [
-"Paid Social",
-"Organic Social"
-],
-"unassigned": [
-"Unassigned"
-],
-"referral": [
-"Referral"
-],
-"other": [
-"Display",
-"Email",
-"Paid Other",
-"Paid Video"
-]
-},
-"overall_funnel_steps": [
-"vehicle_details",
-"quote_loader",
-"quote_list",
-"addons",
-"policy_review",
-"payment_page",
-"purchase"
-],
-"adnoc_funnel_steps": [
-"landing_page",
-"vehicle_details",
-"quote_loader",
-"quote_list",
-"addons",
-"policy_review",
-"payment_page",
-"purchase"
-],
-"setup_complete": true,
-"design": {
-"version": "dark-dashboard-v1",
-"approved": true,
-"updated": "2026-07-15",
-"notes": "Rebuilt index.html to match the Phase 1D approved spec: dark navy theme (#0F131C/#171D29/#6C63FF etc.), sticky top nav (Summary/Daily/Weekly/Channels/Funnel/Adnoc/Actions), Chart.js bar charts for Yesterday-vs-PrevDay, Week-vs-Week, Overall Funnel, and Adnoc Funnel, collapsed 'View calculation details' sections for weekly and funnel breakdowns, and abbreviated KPI numbers (e.g. 8.8K, AED 142K). This is now the locked approved design — recurring runs must only update data/values, not redesign. Do not revert to the old light theme."
-},
-"notifications": {
-"slack_recipients": [
-{
-"type": "group_dm",
-"name": "GA4 Reporting - Motor UAE",
-"channel_id": "C0A8NFZSB0W",
-"content": "stakeholder_highlights_only",
-"rule": "STAKEHOLDER-facing. Send only positive/neutral highlights: key metrics, wins, and the report link. Never mention data issues, corrections, bugs, discrepancies, or methodology caveats here."
-},
-{
-"type": "channel",
-"name": "#digital-marketing-team-firsttech",
-"channel_id": "C0A9JR1NESX",
-"content": "internal_issues_and_corrections",
-"rule": "INTERNAL working channel. Send data-quality issues, corrections, methodology notes, and anything flagged as a problem or caveat here instead of the stakeholder group DM. Can also receive the same highlights as the stakeholder group if relevant."
-}
-],
-"rule": "Per explicit user instructions on 2026-07-17: (1) Do NOT DM Pramish Yadav (U09PSG5V9D3) individually anymore. (2) Send positive/results-only highlights to the group DM 'GA4 Reporting - Motor UAE' (C0A8NFZSB0W) — this is a stakeholder-facing group, keep it clean, no issues/corrections/methodology language. (3) Send any data-quality issues, corrections, or caveats to #digital-marketing-team-firsttech (C0A9JR1NESX) instead — this is the internal working channel for that kind of content."
-},
-"data_quality_notes": {
-"purchases_correction_2026_07_17": "On 2026-07-17 discovered that the 'purchases' metric had been sourced from the GA4 Funnel exploration's last step (Purchase), which undercounts by roughly half vs the true 'purchase' ecommerce event (GA4 also fires an unrelated, non-revenue 'Purchase' capitalized event that must be excluded). Revenue figures were confirmed correct throughout — only the purchase count was wrong. All daily files 2026-07-06 through 2026-07-16 were corrected using the true lowercase 'purchase' event count. Adnoc-segment purchase counts are still under review for the same issue. Per the notifications rule above, this kind of note goes to #digital-marketing-team-firsttech, never to the stakeholder group DM."
-},
-"last_updated": "2026-07-17T13:05:00Z"
+  "property_id": "310968067",
+  "analytics_account": "a216941592",
+  "timezone": "Asia/Dubai",
+  "channel_grouping": {
+    "direct": [
+      "Direct"
+    ],
+    "organic_search": [
+      "Organic Search"
+    ],
+    "ppc": [
+      "Paid Search",
+      "Cross-network",
+      "SMS",
+      "AI Assistant"
+    ],
+    "paid_social": [
+      "Paid Social",
+      "Organic Social"
+    ],
+    "unassigned": [
+      "Unassigned"
+    ],
+    "referral": [
+      "Referral"
+    ],
+    "other": [
+      "Display",
+      "Email",
+      "Paid Other",
+      "Paid Video"
+    ]
+  },
+  "overall_funnel_steps": [
+    "vehicle_details",
+    "quote_loader",
+    "quote_list",
+    "addons",
+    "policy_review",
+    "payment_page",
+    "purchase"
+  ],
+  "adnoc_funnel_steps": [
+    "landing_page",
+    "vehicle_details",
+    "quote_loader",
+    "quote_list",
+    "addons",
+    "policy_review",
+    "payment_page",
+    "purchase"
+  ],
+  "setup_complete": true,
+  "design": {
+    "version": "dark-dashboard-v1",
+    "approved": true,
+    "updated": "2026-07-15",
+    "notes": "Rebuilt index.html to match the Phase 1D approved spec: dark navy theme (#0F131C/#171D29/#6C63FF etc.), sticky top nav (Summary/Daily/Weekly/Channels/Funnel/Adnoc/Actions), Chart.js bar charts for Yesterday-vs-PrevDay, Week-vs-Week, Overall Funnel, and Adnoc Funnel, collapsed 'View calculation details' sections for weekly and funnel breakdowns, and abbreviated KPI numbers (e.g. 8.8K, AED 142K). This is now the locked approved design — recurring runs must only update data/values, not redesign. Do not revert to the old light theme."
+  },
+  "notifications": {
+    "slack_recipients": [
+      {
+        "type": "group_dm",
+        "name": "GA4 Reporting - Motor UAE",
+        "channel_id": "C0A8NFZSB0W",
+        "content": "stakeholder_highlights_only",
+        "rule": "STAKEHOLDER-facing. Send only positive/neutral highlights: key metrics, wins, and the report link. Never mention data issues, corrections, bugs, discrepancies, or methodology caveats here."
+      },
+      {
+        "type": "channel",
+        "name": "#digital-marketing-team-firsttech",
+        "channel_id": "C0A9JR1NESX",
+        "content": "internal_issues_and_corrections",
+        "rule": "INTERNAL working channel. Send data-quality issues, corrections, methodology notes, and anything flagged as a problem or caveat here instead of the stakeholder group DM. Can also receive the same highlights as the stakeholder group if relevant."
+      }
+    ],
+    "rule": "Per explicit user instructions on 2026-07-17: (1) Do NOT DM Pramish Yadav (U09PSG5V9D3) individually anymore. (2) Send positive/results-only highlights to the group DM 'GA4 Reporting - Motor UAE' (C0A8NFZSB0W) — this is a stakeholder-facing group, keep it clean, no issues/corrections/methodology language. (3) Send any data-quality issues, corrections, or caveats to #digital-marketing-team-firsttech (C0A9JR1NESX) instead — this is the internal working channel for that kind of content."
+  },
+  "data_quality_notes": {
+    "purchases_correction_2026_07_17": "On 2026-07-17 discovered that the 'purchases' metric had been sourced from the GA4 Funnel exploration's last step (Purchase), which undercounts by roughly half vs the true 'purchase' ecommerce event (GA4 also fires an unrelated, non-revenue 'Purchase' capitalized event that must be excluded). Revenue figures were confirmed correct throughout — only the purchase count was wrong. All daily files 2026-07-06 through 2026-07-16 were corrected using the true lowercase 'purchase' event count. Adnoc-segment purchase counts are still under review for the same issue. Per the notifications rule above, this kind of note goes to #digital-marketing-team-firsttech, never to the stakeholder group DM.",
+    "week_off_gap_2026_07_31_to_08_02": "No scheduled run executed for 2026-07-31, 2026-08-01, or 2026-08-02 due to a week off (team out of office); the automation itself was not broken. Backfilled retroactively on 2026-08-03 by pulling all three missing days directly from the GA4 exploration (Overall Funnel, Adnoc Funnel, Device Category Analysis with Adnoc segment comparison, and Channel Acquisition tabs), following the same methodology as other validated daily files. All three days are now marked status: validated. Per the notifications rule above, this note is informational/internal and should not be surfaced in the stakeholder-facing Slack group DM."
+  },
+  "last_updated": "2026-08-03T09:00:00Z"
 }
